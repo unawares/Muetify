@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -35,6 +35,15 @@
 		0DC7DB1023A3A9160028AB60 /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB0F23A3A9160028AB60 /* ContactsTableViewController.swift */; };
 		0DC7DB1223A3C22F0028AB60 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1123A3C22F0028AB60 /* Contact.swift */; };
 		0DC7DB1423A3C7730028AB60 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1323A3C7730028AB60 /* PlayerViewController.swift */; };
+		0DC7DB1623A4C4DD0028AB60 /* AlbumSongsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1523A4C4DD0028AB60 /* AlbumSongsTableViewController.swift */; };
+		0DC7DB1A23A743780028AB60 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1923A743780028AB60 /* ProfileViewController.swift */; };
+		0DC7DB1C23A758020028AB60 /* ProfileSongsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1B23A758020028AB60 /* ProfileSongsTableViewController.swift */; };
+		0DC7DB1E23A758150028AB60 /* ProfileContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1D23A758150028AB60 /* ProfileContactsTableViewController.swift */; };
+		0DC7DB2023A78C4E0028AB60 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1F23A78C4E0028AB60 /* GoogleService-Info.plist */; };
+		0DC7DB2323A78F380028AB60 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DC7DB2223A78F380028AB60 /* Authentication.storyboard */; };
+		0DC7DB2523A78FD10028AB60 /* PhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB2423A78FD00028AB60 /* PhoneViewController.swift */; };
+		0DC7DB2723A79A600028AB60 /* PhoneVerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB2623A79A600028AB60 /* PhoneVerifyViewController.swift */; };
+		0DC7DB2923A7A5DC0028AB60 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB2823A7A5DC0028AB60 /* SignUpViewController.swift */; };
 		4E6E879C0048BA3FDF3E9728 /* Pods_MuetifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C770C7C462AF73C1433AC7A /* Pods_MuetifyTests.framework */; };
 		C207D8BD9845A6E621DBF171 /* Pods_Muetify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4B36C43FD4E8EABF304E6DF /* Pods_Muetify.framework */; };
 		D401C3339986225345301F61 /* Pods_MuetifyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F97ED55E647B58E8DB5F6847 /* Pods_MuetifyUITests.framework */; };
@@ -93,6 +102,15 @@
 		0DC7DB0F23A3A9160028AB60 /* ContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		0DC7DB1123A3C22F0028AB60 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		0DC7DB1323A3C7730028AB60 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		0DC7DB1523A4C4DD0028AB60 /* AlbumSongsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumSongsTableViewController.swift; sourceTree = "<group>"; };
+		0DC7DB1923A743780028AB60 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		0DC7DB1B23A758020028AB60 /* ProfileSongsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSongsTableViewController.swift; sourceTree = "<group>"; };
+		0DC7DB1D23A758150028AB60 /* ProfileContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContactsTableViewController.swift; sourceTree = "<group>"; };
+		0DC7DB1F23A78C4E0028AB60 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0DC7DB2223A78F380028AB60 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
+		0DC7DB2423A78FD00028AB60 /* PhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewController.swift; sourceTree = "<group>"; };
+		0DC7DB2623A79A600028AB60 /* PhoneVerifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneVerifyViewController.swift; sourceTree = "<group>"; };
+		0DC7DB2823A7A5DC0028AB60 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		38FC6928DD4F955F2CC5A1C4 /* Pods-Muetify-MuetifyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muetify-MuetifyTests.debug.xcconfig"; path = "Target Support Files/Pods-Muetify-MuetifyTests/Pods-Muetify-MuetifyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5C770C7C462AF73C1433AC7A /* Pods_MuetifyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MuetifyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78501FD1312D1D5A463D57AF /* Pods-Muetify-MuetifyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muetify-MuetifyUITests.release.xcconfig"; path = "Target Support Files/Pods-Muetify-MuetifyUITests/Pods-Muetify-MuetifyUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -145,6 +163,10 @@
 				0D2638AB237862B30060D31A /* NetworkCollecitonViewController.swift */,
 				0DC7DB0F23A3A9160028AB60 /* ContactsTableViewController.swift */,
 				0DC7DB1323A3C7730028AB60 /* PlayerViewController.swift */,
+				0DC7DB1523A4C4DD0028AB60 /* AlbumSongsTableViewController.swift */,
+				0DC7DB1923A743780028AB60 /* ProfileViewController.swift */,
+				0DC7DB1B23A758020028AB60 /* ProfileSongsTableViewController.swift */,
+				0DC7DB1D23A758150028AB60 /* ProfileContactsTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -215,17 +237,20 @@
 		0D2EC897237308630098D7E8 /* Muetify */ = {
 			isa = PBXGroup;
 			children = (
+				0DC7DB1F23A78C4E0028AB60 /* GoogleService-Info.plist */,
 				0D52B056237C0FCC005587A4 /* Components */,
 				0D2638A6237861740060D31A /* Preferences */,
 				0D2638712376D5320060D31A /* Songs */,
 				0D26386E2376D11A0060D31A /* Models */,
 				0D2638652373F2060060D31A /* Views */,
 				0D2638642373F1FD0060D31A /* View Controllers */,
+				0DC7DB2123A78EFA0028AB60 /* Authentication View Controllers */,
 				0D2EC898237308630098D7E8 /* AppDelegate.swift */,
 				0D2EC89C237308630098D7E8 /* ViewController.swift */,
-				0D2EC89E237308630098D7E8 /* Main.storyboard */,
 				0D2EC8A4237308630098D7E8 /* Assets.xcassets */,
 				0D2EC8A6237308630098D7E8 /* LaunchScreen.storyboard */,
+				0DC7DB2223A78F380028AB60 /* Authentication.storyboard */,
+				0D2EC89E237308630098D7E8 /* Main.storyboard */,
 				0D2EC8A9237308630098D7E8 /* Info.plist */,
 				0D2EC8A1237308630098D7E8 /* Muetify.xcdatamodeld */,
 			);
@@ -257,6 +282,16 @@
 				0D52B05B237C45CC005587A4 /* MainBroadcaster.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		0DC7DB2123A78EFA0028AB60 /* Authentication View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0DC7DB2423A78FD00028AB60 /* PhoneViewController.swift */,
+				0DC7DB2623A79A600028AB60 /* PhoneVerifyViewController.swift */,
+				0DC7DB2823A7A5DC0028AB60 /* SignUpViewController.swift */,
+			);
+			path = "Authentication View Controllers";
 			sourceTree = "<group>";
 		};
 		5479B9A511454CEC8C043DF9 /* Frameworks */ = {
@@ -297,6 +332,7 @@
 				0D2EC891237308630098D7E8 /* Sources */,
 				0D2EC892237308630098D7E8 /* Frameworks */,
 				0D2EC893237308630098D7E8 /* Resources */,
+				CFA863FF7B5D946F6362B9A6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -394,10 +430,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D2638B4237874B50060D31A /* valid.flv in Resources */,
+				0DC7DB2023A78C4E0028AB60 /* GoogleService-Info.plist in Resources */,
 				0D2638AE23786F590060D31A /* test.mp4 in Resources */,
 				0D2EC8A8237308630098D7E8 /* LaunchScreen.storyboard in Resources */,
 				0D2638732376D5490060D31A /* song1.mp3 in Resources */,
 				0D2EC8A5237308630098D7E8 /* Assets.xcassets in Resources */,
+				0DC7DB2323A78F380028AB60 /* Authentication.storyboard in Resources */,
 				0D2EC8A0237308630098D7E8 /* Main.storyboard in Resources */,
 				0D2638752376D7090060D31A /* song2.mp3 in Resources */,
 			);
@@ -486,6 +524,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CFA863FF7B5D946F6362B9A6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Muetify/Pods-Muetify-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Muetify/Pods-Muetify-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Muetify/Pods-Muetify-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -501,16 +556,23 @@
 				0D26386B2376A6E20060D31A /* ItemsHeaderCollectionReusableView.swift in Sources */,
 				0D52B060237C5771005587A4 /* Item.swift in Sources */,
 				0DC7DB1423A3C7730028AB60 /* PlayerViewController.swift in Sources */,
+				0DC7DB1623A4C4DD0028AB60 /* AlbumSongsTableViewController.swift in Sources */,
 				0D26386D2376AAAF0060D31A /* ItemsAlbumCollectionViewCell.swift in Sources */,
 				0D2638692375DBAF0060D31A /* AlbumsCollectionViewController.swift in Sources */,
 				0D2638AC237862B30060D31A /* NetworkCollecitonViewController.swift in Sources */,
 				0D52B064237D790A005587A4 /* Source.swift in Sources */,
 				0D2638702376D1930060D31A /* SharedPlayerViewController.swift in Sources */,
+				0DC7DB1C23A758020028AB60 /* ProfileSongsTableViewController.swift in Sources */,
+				0DC7DB2723A79A600028AB60 /* PhoneVerifyViewController.swift in Sources */,
 				0DC7DB1023A3A9160028AB60 /* ContactsTableViewController.swift in Sources */,
 				0D52B062237C577D005587A4 /* Header.swift in Sources */,
 				0D2638672373F2190060D31A /* SongsTableViewController.swift in Sources */,
 				0D2EC8A3237308630098D7E8 /* Muetify.xcdatamodeld in Sources */,
+				0DC7DB1A23A743780028AB60 /* ProfileViewController.swift in Sources */,
 				0D52B05E237C55C0005587A4 /* Song.swift in Sources */,
+				0DC7DB2523A78FD10028AB60 /* PhoneViewController.swift in Sources */,
+				0DC7DB1E23A758150028AB60 /* ProfileContactsTableViewController.swift in Sources */,
+				0DC7DB2923A7A5DC0028AB60 /* SignUpViewController.swift in Sources */,
 				0D52B058237C0FDB005587A4 /* MainPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

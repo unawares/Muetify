@@ -1,14 +1,14 @@
 //
-//  SongsTableViewController.swift
+//  AlbumSongsTableViewController.swift
 //  Muetify
 //
-//  Created by Theodore Teddy on 11/7/19.
+//  Created by Theodore Teddy on 12/14/19.
 //  Copyright © 2019 Theodore Teddy. All rights reserved.
 //
 
 import UIKit
 
-class SongsTableViewController: UITableViewController {
+class AlbumSongsTableViewController: UITableViewController {
     
     var items: [Item] = [
         Header(
@@ -71,5 +71,10 @@ class SongsTableViewController: UITableViewController {
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
+    
+    @IBAction func closeButtonClicked(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
 }

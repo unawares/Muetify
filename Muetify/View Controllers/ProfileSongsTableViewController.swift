@@ -1,15 +1,15 @@
 //
-//  SongsTableViewController.swift
+//  ProfileSongsTableViewController.swift
 //  Muetify
 //
-//  Created by Theodore Teddy on 11/7/19.
+//  Created by Theodore Teddy on 12/16/19.
 //  Copyright © 2019 Theodore Teddy. All rights reserved.
 //
 
 import UIKit
 
-class SongsTableViewController: UITableViewController {
-    
+class ProfileSongsTableViewController: UITableViewController {
+
     var items: [Item] = [
         Header(
             title: "Песни на казахском",
@@ -70,6 +70,10 @@ class SongsTableViewController: UITableViewController {
             navigationController.show(playerViewController, sender: self)
         }
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    @IBAction func closeButtonClicked(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
 
 }

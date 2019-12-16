@@ -66,7 +66,7 @@ class SharedPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MainPlayer.shared.isBroadcasted = true
+        MainPlayer.shared.isBroadcasted = false
         MainBroadcaster.shared.broadcastUrl = URL(string: "rtmp://localhost:1935/live/lol")
         
         timer = Timer(timeInterval: 0.1,
@@ -96,6 +96,13 @@ class SharedPlayerViewController: UIViewController {
     @IBAction func playerButtonClicked(_ sender: UIButton) {
         MainPlayer.shared.isPlaying ? MainPlayer.shared.pause() : MainPlayer.shared.play()
         sync()
+    }
+    
+    
+    @IBAction func playerClicked(_ sender: Any) {
+        if let navigationController = navigationController, let playerViewController = self.storyboard?.instantiateViewController(withIdentifier: "player") as? PlayerViewController {
+            navigationController.show(playerViewController, sender: self)
+        }
     }
     
 }
