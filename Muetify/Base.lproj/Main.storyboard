@@ -2054,10 +2054,10 @@
             </objects>
             <point key="canvasLocation" x="3748" y="-308.12807881773398"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Main Navigation Controller-->
         <scene sceneID="EaG-7N-74a">
             <objects>
-                <navigationController storyboardIdentifier="main" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="GEY-Fe-JKK" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="main" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="GEY-Fe-JKK" customClass="MainNavigationController" customModule="Muetify" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5Hk-Qe-Z9z">
