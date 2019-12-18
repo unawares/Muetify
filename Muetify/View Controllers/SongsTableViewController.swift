@@ -7,30 +7,105 @@
 //
 
 import UIKit
+import AVKit
 
 class SongsTableViewController: UITableViewController {
+        
+    var token: String!
     
-    var items: [Item] = [
-        Header(
-            title: "Песни на казахском",
-            description: "Стараемся максимально собрать на казахском"
-        ),
-        Song(
-            url: Bundle.main.url(forResource: "song2", withExtension: ".mp3")!,
-            title: "Мың есе",
-            singer: "Мирас Жугунусов",
-            duration: 3 * 60 + 50
-        ),
-        Song(
-            url: Bundle.main.url(forResource: "song1", withExtension: ".mp3")!,
-            title: "Сенімен",
-            singer: "Мирас Жугунусов",
-            duration: 2 * 60 + 48
-        )
-    ]
+    var items: [Item] = []
+    
+    func foldItems(songReferences: [SongReferenceData]) {
+        var foldedSongs: [FolderData: [Song]] = [:]
+        var unfoldedSongs: [Song] = []
+        
+        for songReference in songReferences {
+            if let songData = songReference.songData {
+                
+                let song = Song(
+                    id: songData.pk,
+                    url: URL(string: songData.media)!,
+                    title: songData.title,
+                    singer: songData.singers.joined(separator: ", "),
+                    duration: TimeInterval(songData.duration)
+                )
+                
+                if let folder = songReference.folderData {
+                    if foldedSongs[folder] == nil {
+                        foldedSongs[folder] = []
+                    }
+                    foldedSongs[folder]?.append(song)
+                } else {
+                    unfoldedSongs.append(song)
+                }
+                
+            }
+        }
+        
+        items.removeAll()
+        
+        for folder in Array(foldedSongs.keys).sorted(by: <) {
+            items.append(Header(
+                title: folder.title,
+                description: folder.description
+            ))
+            for song in foldedSongs[folder]! {
+                items.append(song)
+            }
+        }
+        
+        if unfoldedSongs.count > 0 {
+            
+            items.append(Header(
+                title: "Другие",
+                description: "Не упорядочные песни."
+            ))
+            
+            for song in unfoldedSongs {
+                items.append(song)
+            }
+            
+        }
+        
+        if items.count == 0 {
+            items.append(Header(
+                title: "Пусто",
+                description: "Добавьте песни."
+            ))
+        }
+        
+        tableView.reloadData()
+        refreshControl?.endRefreshing()
+    }
+
+    func showMessage(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func loadSongs() {
+        refreshControl?.beginRefreshing()
+        AppService().setToken(token: token).getUserSongs { [weak self] songReference, error in
+            DispatchQueue.main.sync {
+                if let error = error {
+                    self?.showMessage(title: "Error", message: error.localizedDescription)
+                    self?.refreshControl?.endRefreshing()
+                } else {
+                    self?.foldItems(songReferences: songReference)
+                }
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        token = UserDefaults.standard.string(forKey: "token")
+        
+        refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        tableView.addSubview(refreshControl!)
+        
+        loadSongs()
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -48,7 +123,12 @@ class SongsTableViewController: UITableViewController {
         
         switch item {
         case is Header:
-            cell = tableView.dequeueReusableCell(withIdentifier: "items_header", for: indexPath)
+            let header = item as! Header
+            let itemView = tableView.dequeueReusableCell(withIdentifier: "items_header", for: indexPath) as! ItemsHeaderTableViewCell
+            itemView.titleLabel.text = header.title
+            itemView.descriptionLabel.text = header.description
+            itemView.settingsButton.isHidden = indexPath.row != 0
+            cell = itemView
         case is Song:
             let song = item as! Song
             let itemView = tableView.dequeueReusableCell(withIdentifier: "items_song", for: indexPath) as! ItemsSongTableViewCell
@@ -66,10 +146,16 @@ class SongsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let navigationController = navigationController, let playerViewController = self.storyboard?.instantiateViewController(withIdentifier: "player") as? PlayerViewController {
-            navigationController.show(playerViewController, sender: self)
+        if items[indexPath.row] is Song {
+            if let navigationController = navigationController, let playerViewController = self.storyboard?.instantiateViewController(withIdentifier: "player") as? PlayerViewController {
+                navigationController.show(playerViewController, sender: self)
+            }
+            tableView.deselectRow(at: indexPath, animated: true)
         }
-        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    @objc func refresh(sender:AnyObject) {
+       loadSongs()
     }
 
 }

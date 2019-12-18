@@ -13,12 +13,24 @@ final class AuthService {
     
     private let client = WebClient(baseUrl: "http://192.168.1.9:8000")
     
+    func setToken(token: String) -> AuthService {
+        client.token = "Token \(token)"
+        return self
+    }
+    
     @discardableResult
     func syncPhoneNumber(forPhoneNumber phoneNumber: PhoneNumberModel, completion: @escaping (PhoneNumberModel?, ServiceError?) -> ()) -> URLSessionDataTask? {
         let params: JSON = ["phone_number": phoneNumber.phoneNumber]
         
         return client.load(path: "/auth/phone/", method: .post, params: params) { result, error in
             completion(PhoneNumberModel(json: result as? JSON), error)
+        }
+    }
+    
+    @discardableResult
+    func getUser(completion: @escaping (UserData?, ServiceError?) -> ()) -> URLSessionDataTask? {
+        return client.load(path: "/auth/user/", method: .get, params: [:]) { result, error in
+            completion(UserData(json: result as? JSON), error)
         }
     }
     

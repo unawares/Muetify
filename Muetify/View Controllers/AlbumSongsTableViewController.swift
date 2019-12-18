@@ -10,24 +10,7 @@ import UIKit
 
 class AlbumSongsTableViewController: UITableViewController {
     
-    var items: [Item] = [
-        Header(
-            title: "Песни на казахском",
-            description: "Стараемся максимально собрать на казахском"
-        ),
-        Song(
-            url: Bundle.main.url(forResource: "song2", withExtension: ".mp3")!,
-            title: "Мың есе",
-            singer: "Мирас Жугунусов",
-            duration: 3 * 60 + 50
-        ),
-        Song(
-            url: Bundle.main.url(forResource: "song1", withExtension: ".mp3")!,
-            title: "Сенімен",
-            singer: "Мирас Жугунусов",
-            duration: 2 * 60 + 48
-        )
-    ]
+    var items: [Item] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -39,7 +39,7 @@ struct SignInData: Decodable {
 
 struct UserData: Decodable {
     
-    var id: Int
+    var pk: Int
     var firstName: String
     var lastName: String
     var phoneNumber: String
@@ -52,7 +52,7 @@ extension UserData {
     
     init?(json: JSON?) {
         if let json = json {
-            self.id = json["id"] as! Int
+            self.pk = json["pk"] as! Int
             self.firstName = json["first_name"] as! String
             self.lastName = json["last_name"] as! String
             self.phoneNumber = json["phone_number"] as! String

@@ -55,7 +55,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 uuid: authData.uuid!,
                 data: authData.data!,
                 userData: UserData(
-                    id: -1,
+                    pk: -1,
                     firstName: firstName,
                     lastName: lastName,
                     phoneNumber: phoneNumber,
@@ -63,7 +63,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 )
             )) { [weak self] tokenAuthData, error in
                 
-                DispatchQueue.main.async {
+                DispatchQueue.main.sync {
                     if let error = error {
                         self?.showMessage(title: "Error", message: error.localizedDescription)
                     } else if let tokenAuthData = tokenAuthData {

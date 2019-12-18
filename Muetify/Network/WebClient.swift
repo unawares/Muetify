@@ -108,6 +108,7 @@ extension URLRequest {
 final class WebClient {
     
     private var baseUrl: String
+    public var token: String?
     
     init(baseUrl: String) {
         self.baseUrl = baseUrl
@@ -120,7 +121,11 @@ final class WebClient {
             return nil
         }
         
-        let request = URLRequest(baseUrl: baseUrl, path: path, method: method, params: params)
+        var request = URLRequest(baseUrl: baseUrl, path: path, method: method, params: params)
+            
+        if let token = token {
+            request.addValue(token, forHTTPHeaderField: "Authorization")
+        }
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             var object: Any? = nil

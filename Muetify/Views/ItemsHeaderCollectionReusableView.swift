@@ -8,15 +8,7 @@
 
 import UIKit
 
-class ItemsHeaderCollectionReusableView: UICollectionReusableView {
-    
-    var filters: [String] = [
-        "По жанрам",
-        "По исполнителям",
-        "По дате загрузки",
-        "Сделать свое",
-    ]
-    
+class ItemsHeaderCollectionReusableView: UICollectionReusableView {    
     
     override func awakeFromNib() {
     }

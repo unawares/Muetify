@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D0A07F223AA406500FB7944 /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A07F123AA406500FB7944 /* AppService.swift */; };
+		0D0A07F423AA40CF00FB7944 /* AppModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A07F323AA40CF00FB7944 /* AppModels.swift */; };
+		0D0A07F623AA90BB00FB7944 /* ItemsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A07F523AA90BB00FB7944 /* ItemsHeaderTableViewCell.swift */; };
 		0D2638672373F2190060D31A /* SongsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2638662373F2190060D31A /* SongsTableViewController.swift */; };
 		0D2638692375DBAF0060D31A /* AlbumsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2638682375DBAF0060D31A /* AlbumsCollectionViewController.swift */; };
 		0D26386B2376A6E20060D31A /* ItemsHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D26386A2376A6E20060D31A /* ItemsHeaderCollectionReusableView.swift */; };
@@ -48,7 +51,7 @@
 		0DC7DB2F23A8A81A0028AB60 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB2E23A8A81A0028AB60 /* Reachability.swift */; };
 		0DC7DB3123A8A84E0028AB60 /* WebClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB3023A8A84E0028AB60 /* WebClient.swift */; };
 		0DC7DB4223A8AD800028AB60 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB4123A8AD800028AB60 /* AuthService.swift */; };
-		0DC7DB4623A8B0100028AB60 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB4523A8B0100028AB60 /* Authentication.swift */; };
+		0DC7DB4623A8B0100028AB60 /* AuthenticationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB4523A8B0100028AB60 /* AuthenticationModels.swift */; };
 		0DC7DB4823A8C56F0028AB60 /* AuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB4723A8C56F0028AB60 /* AuthData.swift */; };
 		0DC7DB4A23A8E21E0028AB60 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB4923A8E21E0028AB60 /* MainNavigationController.swift */; };
 		4E6E879C0048BA3FDF3E9728 /* Pods_MuetifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C770C7C462AF73C1433AC7A /* Pods_MuetifyTests.framework */; };
@@ -74,6 +77,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D0A07F123AA406500FB7944 /* AppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
+		0D0A07F323AA40CF00FB7944 /* AppModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModels.swift; sourceTree = "<group>"; };
+		0D0A07F523AA90BB00FB7944 /* ItemsHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		0D2638662373F2190060D31A /* SongsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsTableViewController.swift; sourceTree = "<group>"; };
 		0D2638682375DBAF0060D31A /* AlbumsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsCollectionViewController.swift; sourceTree = "<group>"; };
 		0D26386A2376A6E20060D31A /* ItemsHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -122,7 +128,7 @@
 		0DC7DB2E23A8A81A0028AB60 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		0DC7DB3023A8A84E0028AB60 /* WebClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebClient.swift; sourceTree = "<group>"; };
 		0DC7DB4123A8AD800028AB60 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
-		0DC7DB4523A8B0100028AB60 /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		0DC7DB4523A8B0100028AB60 /* AuthenticationModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationModels.swift; sourceTree = "<group>"; };
 		0DC7DB4723A8C56F0028AB60 /* AuthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthData.swift; sourceTree = "<group>"; };
 		0DC7DB4923A8E21E0028AB60 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		38FC6928DD4F955F2CC5A1C4 /* Pods-Muetify-MuetifyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muetify-MuetifyTests.debug.xcconfig"; path = "Target Support Files/Pods-Muetify-MuetifyTests/Pods-Muetify-MuetifyTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -192,6 +198,7 @@
 				0D26386A2376A6E20060D31A /* ItemsHeaderCollectionReusableView.swift */,
 				0D26386C2376AAAF0060D31A /* ItemsAlbumCollectionViewCell.swift */,
 				0D52B065237D7AE9005587A4 /* ItemsSongTableViewCell.swift */,
+				0D0A07F523AA90BB00FB7944 /* ItemsHeaderTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -326,7 +333,8 @@
 		0DC7DB3D23A8AA840028AB60 /* Network Models */ = {
 			isa = PBXGroup;
 			children = (
-				0DC7DB4523A8B0100028AB60 /* Authentication.swift */,
+				0DC7DB4523A8B0100028AB60 /* AuthenticationModels.swift */,
+				0D0A07F323AA40CF00FB7944 /* AppModels.swift */,
 			);
 			path = "Network Models";
 			sourceTree = "<group>";
@@ -335,6 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				0DC7DB4123A8AD800028AB60 /* AuthService.swift */,
+				0D0A07F123AA406500FB7944 /* AppService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -599,7 +608,7 @@
 				0DC7DB4A23A8E21E0028AB60 /* MainNavigationController.swift in Sources */,
 				0DC7DB4223A8AD800028AB60 /* AuthService.swift in Sources */,
 				0D2EC899237308630098D7E8 /* AppDelegate.swift in Sources */,
-				0DC7DB4623A8B0100028AB60 /* Authentication.swift in Sources */,
+				0DC7DB4623A8B0100028AB60 /* AuthenticationModels.swift in Sources */,
 				0D52B066237D7AE9005587A4 /* ItemsSongTableViewCell.swift in Sources */,
 				0D26386B2376A6E20060D31A /* ItemsHeaderCollectionReusableView.swift in Sources */,
 				0D52B060237C5771005587A4 /* Item.swift in Sources */,
@@ -620,12 +629,15 @@
 				0DC7DB2B23A8A5450028AB60 /* SignIn.swift in Sources */,
 				0D2EC8A3237308630098D7E8 /* Muetify.xcdatamodeld in Sources */,
 				0DC7DB1A23A743780028AB60 /* ProfileViewController.swift in Sources */,
+				0D0A07F623AA90BB00FB7944 /* ItemsHeaderTableViewCell.swift in Sources */,
 				0DC7DB3123A8A84E0028AB60 /* WebClient.swift in Sources */,
+				0D0A07F423AA40CF00FB7944 /* AppModels.swift in Sources */,
 				0D52B05E237C55C0005587A4 /* Song.swift in Sources */,
 				0DC7DB2523A78FD10028AB60 /* PhoneViewController.swift in Sources */,
 				0DC7DB1E23A758150028AB60 /* ProfileContactsTableViewController.swift in Sources */,
 				0DC7DB2923A7A5DC0028AB60 /* SignUpViewController.swift in Sources */,
 				0D52B058237C0FDB005587A4 /* MainPlayer.swift in Sources */,
+				0D0A07F223AA406500FB7944 /* AppService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

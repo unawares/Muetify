@@ -29,8 +29,7 @@ class PhoneVerifyViewController: UIViewController {
             uuid: authData.uuid!,
             data: authData.data!
         )) { [weak self] tokenAuthData, error in
-            
-            DispatchQueue.main.async {
+            DispatchQueue.main.sync {
                 if let error = error {
                     self?.showMessage(title: "Error", message: error.localizedDescription)
                 } else if let tokenAuthData = tokenAuthData {
@@ -60,25 +59,26 @@ class PhoneVerifyViewController: UIViewController {
         let db = Firestore.firestore()
         let reference = db.collection("users").document(phoneNumber)
         reference.getDocument { [weak self] (document, error) in
-            if let document = document, document.exists {
-                let authData = AuthData(snapshot: document)
-                
-                if let isRegistered = authData.isRegistered {
-                    if isRegistered {
-                        self?.syncSignInAuth(authData: authData)  // Next level
+            DispatchQueue.main.sync {
+                if let document = document, document.exists {
+                    let authData = AuthData(snapshot: document)
+                    if let isRegistered = authData.isRegistered {
+                        if isRegistered {
+                            self?.syncSignInAuth(authData: authData)  // Next level
+                        } else {
+                            self?.syncSignUpAuth(authData: authData)  // Next level
+                        }
                     } else {
-                        self?.syncSignUpAuth(authData: authData)  // Next level
+                        self?.showMessage(title: "Error", message: "Something went wrong.")
+                        self?.view.isUserInteractionEnabled = true
+                        self?.indicator.stopAnimating()
                     }
+                    
                 } else {
                     self?.showMessage(title: "Error", message: "Something went wrong.")
                     self?.view.isUserInteractionEnabled = true
                     self?.indicator.stopAnimating()
                 }
-                
-            } else {
-                self?.showMessage(title: "Error", message: "Something went wrong.")
-                self?.view.isUserInteractionEnabled = true
-                self?.indicator.stopAnimating()
             }
         }
     }
@@ -104,13 +104,15 @@ class PhoneVerifyViewController: UIViewController {
                 let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID,
                         verificationCode: verificationCode)
                 Auth.auth().signIn(with: credential) { [weak self] (authResult, error) in
-                    if let error = error {
-                        self?.showMessage(title: "Error", message: error.localizedDescription)
-                        self?.view.isUserInteractionEnabled = true
-                        self?.indicator.stopAnimating()
-                        return
+                    DispatchQueue.main.sync {
+                        if let error = error {
+                            self?.showMessage(title: "Error", message: error.localizedDescription)
+                            self?.view.isUserInteractionEnabled = true
+                            self?.indicator.stopAnimating()
+                            return
+                        }
+                        self?.syncAuth()  // Next level
                     }
-                    self?.syncAuth()  // Next level
                 }
 
             } else {

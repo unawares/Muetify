@@ -11,11 +11,13 @@ import UIKit
 
 class MainNavigationController: UINavigationController {
     
-    var tokenAuthData: TokenAuthData!
+    var tokenAuthData: TokenAuthData?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserDefaults.standard.set(tokenAuthData.token, forKey: "token")
+        if let tokenAuthData = tokenAuthData {
+            UserDefaults.standard.set(tokenAuthData.token, forKey: "token")
+        }
     }
 
 }
