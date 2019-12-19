@@ -12,9 +12,9 @@ import Foundation
 class Header : Item {
     
     var title: String
-    var description: String
+    var description: String?
     
-    init(title: String, description: String) {
+    init(title: String, description: String?) {
         self.title = title
         self.description = description
     }

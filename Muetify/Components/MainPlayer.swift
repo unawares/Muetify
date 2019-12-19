@@ -82,7 +82,10 @@ class MainPlayer {
     }
     
     func getDuration() -> CMTime? {
-        return self.player.currentItem?.asset.duration
+        if let source = source {
+            return CMTime(seconds: source.getDuration(), preferredTimescale: 1000000)
+        }
+        return nil
     }
     
     func getCurrentTime() -> CMTime? {

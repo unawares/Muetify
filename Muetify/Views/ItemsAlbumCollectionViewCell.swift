@@ -10,4 +10,7 @@ import UIKit
 
 class ItemsAlbumCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    
 }

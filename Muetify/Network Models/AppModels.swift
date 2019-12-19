@@ -89,3 +89,127 @@ extension SongReferenceData {
     }
     
 }
+
+
+protocol AlbumBase {
+    
+    func getCount() -> Int
+    
+    func getTitle() -> String
+    
+    func getKey() -> String
+    
+}
+
+
+struct UserGenreData: AlbumBase, Decodable {
+
+    
+    var genre: String
+    var count: Int
+    
+    func getKey() -> String {
+        return genre
+    }
+    
+    func getCount() -> Int {
+        return count
+    }
+    
+    func getTitle() -> String {
+        return genre
+    }
+    
+}
+
+
+extension UserGenreData {
+    
+    init?(json: JSON?) {
+        if let json = json {
+            self.genre = json["genre"] as! String
+            self.count = json["songs_count"] as! Int
+        } else {
+            return nil
+        }
+    }
+    
+}
+
+
+
+struct UserSingerData: AlbumBase, Decodable {
+    
+    var pk: Int
+    var firstName: String
+    var lastName: String
+    var count: Int
+    
+    func getKey() -> String {
+        return "\(pk)"
+    }
+    
+    func getCount() -> Int {
+        return count
+    }
+    
+    func getTitle() -> String {
+        return "\(firstName) \(lastName)"
+    }
+    
+}
+
+
+extension UserSingerData {
+    
+    init?(json: JSON?) {
+        if let json = json {
+            self.pk = json["pk"] as! Int
+            self.firstName = json["first_name"] as! String
+            self.lastName = json["last_name"] as! String
+            self.count = json["songs_count"] as! Int
+        } else {
+            return nil
+        }
+    }
+    
+}
+
+
+
+struct UserFolderData: AlbumBase, Decodable {
+        
+    var pk: Int
+    var title: String
+    var description: String
+    var count: Int
+    
+    func getKey() -> String {
+        return "\(pk)"
+    }
+    
+    func getCount() -> Int {
+        return count
+    }
+    
+    func getTitle() -> String {
+        return title
+    }
+    
+}
+
+
+extension UserFolderData {
+    
+    init?(json: JSON?) {
+        if let json = json {
+            self.pk = json["pk"] as! Int
+            self.title = json["title"] as! String
+            self.description = json["description"] as! String
+            self.count = json["songs_count"] as! Int
+        } else {
+            return nil
+        }
+    }
+    
+}

@@ -11,10 +11,14 @@ import Foundation
 
 protocol Source {
     
+    func getId() -> Int
+    
     func getUrl() -> URL
     
     func getTitle() -> String
         
     func getSinger() -> String
+    
+    func getDuration() -> TimeInterval
     
 }

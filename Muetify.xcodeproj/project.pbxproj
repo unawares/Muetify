@@ -10,6 +10,7 @@
 		0D0A07F223AA406500FB7944 /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A07F123AA406500FB7944 /* AppService.swift */; };
 		0D0A07F423AA40CF00FB7944 /* AppModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A07F323AA40CF00FB7944 /* AppModels.swift */; };
 		0D0A07F623AA90BB00FB7944 /* ItemsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A07F523AA90BB00FB7944 /* ItemsHeaderTableViewCell.swift */; };
+		0D0A07FA23ABEE5500FB7944 /* ItemsAlbumSongsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A07F923ABEE5500FB7944 /* ItemsAlbumSongsHeaderTableViewCell.swift */; };
 		0D2638672373F2190060D31A /* SongsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2638662373F2190060D31A /* SongsTableViewController.swift */; };
 		0D2638692375DBAF0060D31A /* AlbumsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2638682375DBAF0060D31A /* AlbumsCollectionViewController.swift */; };
 		0D26386B2376A6E20060D31A /* ItemsHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D26386A2376A6E20060D31A /* ItemsHeaderCollectionReusableView.swift */; };
@@ -80,6 +81,7 @@
 		0D0A07F123AA406500FB7944 /* AppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
 		0D0A07F323AA40CF00FB7944 /* AppModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModels.swift; sourceTree = "<group>"; };
 		0D0A07F523AA90BB00FB7944 /* ItemsHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		0D0A07F923ABEE5500FB7944 /* ItemsAlbumSongsHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsAlbumSongsHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		0D2638662373F2190060D31A /* SongsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsTableViewController.swift; sourceTree = "<group>"; };
 		0D2638682375DBAF0060D31A /* AlbumsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsCollectionViewController.swift; sourceTree = "<group>"; };
 		0D26386A2376A6E20060D31A /* ItemsHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				0D26386C2376AAAF0060D31A /* ItemsAlbumCollectionViewCell.swift */,
 				0D52B065237D7AE9005587A4 /* ItemsSongTableViewCell.swift */,
 				0D0A07F523AA90BB00FB7944 /* ItemsHeaderTableViewCell.swift */,
+				0D0A07F923ABEE5500FB7944 /* ItemsAlbumSongsHeaderTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -635,6 +638,7 @@
 				0D52B05E237C55C0005587A4 /* Song.swift in Sources */,
 				0DC7DB2523A78FD10028AB60 /* PhoneViewController.swift in Sources */,
 				0DC7DB1E23A758150028AB60 /* ProfileContactsTableViewController.swift in Sources */,
+				0D0A07FA23ABEE5500FB7944 /* ItemsAlbumSongsHeaderTableViewCell.swift in Sources */,
 				0DC7DB2923A7A5DC0028AB60 /* SignUpViewController.swift in Sources */,
 				0D52B058237C0FDB005587A4 /* MainPlayer.swift in Sources */,
 				0D0A07F223AA406500FB7944 /* AppService.swift in Sources */,

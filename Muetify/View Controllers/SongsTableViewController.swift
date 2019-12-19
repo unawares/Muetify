@@ -58,7 +58,7 @@ class SongsTableViewController: UITableViewController {
             
             items.append(Header(
                 title: "Другие",
-                description: "Не упорядочные песни."
+                description: nil
             ))
             
             for song in unfoldedSongs {

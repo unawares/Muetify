@@ -25,6 +25,10 @@ class Song : Item, Source {
         self.duration = duration
     }
     
+    func getId() -> Int {
+        return id
+    }
+    
     func getUrl() -> URL {
         return url
     }
@@ -35,6 +39,10 @@ class Song : Item, Source {
     
     func getSinger() -> String {
         return singer
+    }
+    
+    func getDuration() -> TimeInterval {
+        return duration
     }
     
 }

@@ -128,6 +128,9 @@ final class WebClient {
         }
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error?.localizedDescription, error == "cancelled" {
+                return
+            }
             var object: Any? = nil
             if let data = data {
                 object = try? JSONSerialization.jsonObject(with: data, options: [])
