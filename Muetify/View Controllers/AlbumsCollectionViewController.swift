@@ -102,7 +102,7 @@ class AlbumsCollectionViewController: UICollectionViewController, FilterDelegate
         switch filterType {
         case .FOLDERS:
             filterRequestTask = appService.getUserFolders { [weak self] userFolderDatas, error in
-                DispatchQueue.main.sync {
+                DispatchQueue.main.async {
                     if let error = error {
                         self?.showMessage(title: "Error", message: error.localizedDescription)
                         self?.indicator.stopAnimating()
@@ -113,7 +113,7 @@ class AlbumsCollectionViewController: UICollectionViewController, FilterDelegate
             }
         case .GENRES:
             filterRequestTask = appService.getUserGenres { [weak self] userGenreDatas, error in
-                DispatchQueue.main.sync {
+                DispatchQueue.main.async {
                     if let error = error {
                         self?.showMessage(title: "Error", message: error.localizedDescription)
                         self?.indicator.stopAnimating()
@@ -124,7 +124,7 @@ class AlbumsCollectionViewController: UICollectionViewController, FilterDelegate
             }
         case .SINGERS:
             filterRequestTask = appService.getUserSingers { [weak self] userSingerDatas, error in
-                DispatchQueue.main.sync {
+                DispatchQueue.main.async {
                     if let error = error {
                         self?.showMessage(title: "Error", message: error.localizedDescription)
                         self?.indicator.stopAnimating()

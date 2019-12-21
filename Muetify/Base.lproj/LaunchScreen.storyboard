@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_logo" translatesAutoresizingMaskIntoConstraints="NO" id="efX-X0-kk4">
-                                <rect key="frame" x="87" y="328" width="240" height="240"/>
+                                <rect key="frame" x="87" y="333" width="240" height="240"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="8g8-H6-xUY"/>
                                     <constraint firstAttribute="width" constant="240" id="tvq-Qq-tp7"/>
@@ -29,10 +30,10 @@
                         <constraints>
                             <constraint firstItem="qRs-ed-V8K" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Bep-Ve-Qcc"/>
                             <constraint firstItem="qRs-ed-V8K" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Grc-bE-bT3"/>
-                            <constraint firstItem="efX-X0-kk4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="exg-yT-jNo"/>
+                            <constraint firstItem="efX-X0-kk4" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="exg-yT-jNo"/>
                             <constraint firstAttribute="bottom" secondItem="qRs-ed-V8K" secondAttribute="bottom" id="n31-dA-Nii"/>
                             <constraint firstItem="qRs-ed-V8K" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="spc-if-HNj"/>
-                            <constraint firstItem="efX-X0-kk4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="tcL-08-pOe"/>
+                            <constraint firstItem="efX-X0-kk4" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="tcL-08-pOe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

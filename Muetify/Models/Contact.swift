@@ -11,12 +11,18 @@ import Foundation
 
 class Contact : Item {
     
-    var fullName: String
-    var statusInfo: String
+    var id: Int
+    var firstName: String
+    var lastName: String
+    var phoneNumber: String
+    var avatar: String?
     
-    init(fullName: String, statusInfo: String) {
-        self.fullName = fullName
-        self.statusInfo = statusInfo
+    init(id: Int, firstName: String, lastName: String, phoneNumber: String, avatar: String?) {
+        self.id = id
+        self.firstName = firstName
+        self.lastName = lastName
+        self.phoneNumber = phoneNumber
+        self.avatar = avatar
     }
     
 }

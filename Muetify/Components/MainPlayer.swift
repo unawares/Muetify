@@ -15,70 +15,35 @@ class MainPlayer {
     static var shared = MainPlayer()
     
     private var player: AVPlayer!
-    private var timer: Timer!
-    private var lastTime: Double = 0
     
     var source: Source? {
         
         didSet {
-            reload()
+            if let url = source?.getUrl() {
+                player.replaceCurrentItem(with: AVPlayerItem(url: url))
+            }
         }
         
     }
     
     var isPlaying: Bool = false
-    var isBroadcasted: Bool = false
     
     private init () {
         player = AVPlayer()
-        timer = Timer(timeInterval: 1.0,
-                            target: self,
-                            selector: #selector(check),
-                            userInfo: nil,
-                            repeats: true)
-        RunLoop.current.add(timer, forMode: .common)
-        timer.tolerance = 0.1
-    }
-    
-    @objc func check() {
-        if isPlaying, let currentTime = getCurrentTime() {
-            if currentTime.seconds == lastTime {
-                reload()
-                player.play()
-                print("Play")
-            }
-            lastTime = currentTime.seconds
-        }
-        
-    }
-    
-    func reload() {
-        if let url = source?.getUrl() {
-            player.replaceCurrentItem(with: AVPlayerItem.init(url: url))
-        }
     }
     
     func play() {
         isPlaying = true
         player.play()
-        if isBroadcasted, let url = source?.getUrl() {
-            MainBroadcaster.shared.start(url: url, padding: Int(player.currentTime().seconds))
-        }
-    }
-    
-    func start(padding: Double) {
-        player.seek(to: CMTime(seconds: padding, preferredTimescale: 60000))
-        isPlaying = true
-        player.play()
-        if isBroadcasted, let url = source?.getUrl() {
-            MainBroadcaster.shared.start(url: url, padding: Int(padding))
-        }
     }
     
     func pause() {
         isPlaying = false
         player.pause()
-        MainBroadcaster.shared.stop()
+    }
+    
+    func seek(padding: Double) {
+        player.seek(to: CMTime(seconds: padding, preferredTimescale: 60000))
     }
     
     func getDuration() -> CMTime? {
@@ -89,7 +54,8 @@ class MainPlayer {
     }
     
     func getCurrentTime() -> CMTime? {
-        return self.player.currentTime()
+        let time = self.player.currentTime()
+        return time.isValid ? time : nil
     }
     
 }

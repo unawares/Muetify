@@ -8,13 +8,31 @@
 
 import UIKit
 
-class AlbumSongsTableViewController: UITableViewController {
+class AlbumSongsTableViewController: UITableViewController, ItemSongDelegate {
     
     var token: String!
     var album: AlbumBase?
     var filterType: FilterType?
     var items: [Item] = []
     var task: URLSessionDataTask?
+    
+    var selectedIndexPath: IndexPath?
+    
+    var timer: Timer!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+        timer = Timer(timeInterval: 0.1,
+                            target: self,
+                            selector: #selector(update),
+                            userInfo: nil,
+                            repeats: true)
+        RunLoop.current.add(timer, forMode: .common)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        timer.invalidate()
+    }
     
     func showMessage(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -47,7 +65,7 @@ class AlbumSongsTableViewController: UITableViewController {
             switch filterType {
             case .FOLDERS:
                 appService.getFolderSongs(folder: album.getKey()) { [weak self] songs, error in
-                    DispatchQueue.main.sync {
+                    DispatchQueue.main.async {
                         if let error = error {
                             self?.showMessage(title: "Error", message: error.localizedDescription)
                             self?.refreshControl?.endRefreshing()
@@ -57,7 +75,7 @@ class AlbumSongsTableViewController: UITableViewController {
                 }
             case .GENRES:
                 appService.getGenreSongs(genre: album.getKey()) { [weak self] songs, error in
-                    DispatchQueue.main.sync {
+                    DispatchQueue.main.async {
                         if let error = error {
                             self?.showMessage(title: "Error", message: error.localizedDescription)
                             self?.refreshControl?.endRefreshing()
@@ -67,7 +85,7 @@ class AlbumSongsTableViewController: UITableViewController {
                 }
             case .SINGERS:
                 appService.getSingerSongs(singer: album.getKey()) { [weak self] songs, error in
-                    DispatchQueue.main.sync {
+                    DispatchQueue.main.async {
                         if let error = error {
                             self?.showMessage(title: "Error", message: error.localizedDescription)
                             self?.refreshControl?.endRefreshing()
@@ -112,10 +130,21 @@ class AlbumSongsTableViewController: UITableViewController {
             let song = item as! Song
             let itemView = tableView.dequeueReusableCell(withIdentifier: "items_song", for: indexPath) as! ItemsSongTableViewCell
             let (_, m, s) = secondsToHoursMinutesSeconds(seconds: Int(song.duration))
+            
             itemView.song = song
+            
+            itemView.indexPath = indexPath
             itemView.titleLabel.text = song.getTitle()
             itemView.singerLabel.text = song.getSinger()
             itemView.timeLabel.text = String(format: "%02d:%02d", m, s)
+            itemView.isAttached = song.getId() == MainPlayer.shared.source?.getId()
+            
+            if itemView.isAttached && selectedIndexPath?.row != indexPath.row {
+                playButtonClicked(indexPath: indexPath)
+            }
+            
+            itemView.delegate = self
+            
             cell = itemView
         default:
             cell = nil
@@ -136,10 +165,40 @@ class AlbumSongsTableViewController: UITableViewController {
     @IBAction func closeButtonClicked(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
+
+    @objc func update() {
+        if let indexPath = selectedIndexPath, let song = items[indexPath.row] as? Song {
+            if song.getId() == MainPlayer.shared.source?.getId() {
+                if let cell = tableView.cellForRow(at: indexPath) as? ItemsSongTableViewCell {
+                    if let current = MainPlayer.shared.getCurrentTime()?.seconds, let total = MainPlayer.shared.getDuration()?.seconds {
+                        if (total != Double.nan) {
+                            let progress = max(0, min(Float(current / total), 1))
+                            cell.setProgress(progress: progress)
+                        } else {
+                            cell.setProgress(progress: 0)
+                        }
+                    }
+                    cell.syncButton()
+                }
+            }
+        }
+    }
+    
+    func playButtonClicked(indexPath: IndexPath) {
+        UIView.performWithoutAnimation {
+            tableView.beginUpdates()
+            if let selectedIndexPath = selectedIndexPath {
+                tableView.reloadRows(at: [selectedIndexPath, indexPath], with: .none)
+            } else {
+                tableView.reloadRows(at: [indexPath], with: .none)
+            }
+            selectedIndexPath = indexPath
+            tableView.endUpdates()
+        }
+    }
     
     @objc func refresh(sender:AnyObject) {
        loadSongs()
     }
-    
     
 }

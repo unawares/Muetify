@@ -11,7 +11,7 @@ import Foundation
 
 final class AuthService {
     
-    private let client = WebClient(baseUrl: "http://192.168.1.9:8000")
+    private let client = WebClient(baseUrl: "http://192.168.1.9:8080")
     
     func setToken(token: String) -> AuthService {
         client.token = "Token \(token)"

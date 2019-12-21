@@ -16,7 +16,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var lastNameTextField: UITextField!
     
     var phoneNumber: String!
-    var authData: AuthData!
+    var authData: FirebaseAuthData!
     var authTask: URLSessionDataTask!
     
     func showMessage(title: String, message: String) {
@@ -63,12 +63,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 )
             )) { [weak self] tokenAuthData, error in
                 
-                DispatchQueue.main.sync {
+                DispatchQueue.main.async {
                     if let error = error {
                         self?.showMessage(title: "Error", message: error.localizedDescription)
                     } else if let tokenAuthData = tokenAuthData {
                         if let navigationController = self?.storyboard?.instantiateViewController(withIdentifier: "main") as? MainNavigationController {
                             navigationController.tokenAuthData = tokenAuthData
+                            navigationController.modalPresentationStyle = .fullScreen
                             self?.present(navigationController, animated: true, completion: nil)
                         }
                     }

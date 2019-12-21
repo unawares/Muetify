@@ -24,17 +24,18 @@ class PhoneVerifyViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func syncSignInAuth(authData: AuthData) {
+    func syncSignInAuth(authData: FirebaseAuthData) {
         authTask = AuthService().syncSignIn(forSignInData: SignInData(
             uuid: authData.uuid!,
             data: authData.data!
         )) { [weak self] tokenAuthData, error in
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
                 if let error = error {
                     self?.showMessage(title: "Error", message: error.localizedDescription)
                 } else if let tokenAuthData = tokenAuthData {
                     if let navigationController = self?.storyboard?.instantiateViewController(withIdentifier: "main") as? MainNavigationController {
                         navigationController.tokenAuthData = tokenAuthData
+                        navigationController.modalPresentationStyle = .fullScreen
                         self?.present(navigationController, animated: true, completion: nil)
                     }
                 }
@@ -45,7 +46,7 @@ class PhoneVerifyViewController: UIViewController {
         }
     }
     
-    func syncSignUpAuth(authData: AuthData) {
+    func syncSignUpAuth(authData: FirebaseAuthData) {
         if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "sign_up") as? SignUpViewController {
             viewController.phoneNumber = phoneNumber
             viewController.authData = authData
@@ -59,9 +60,9 @@ class PhoneVerifyViewController: UIViewController {
         let db = Firestore.firestore()
         let reference = db.collection("users").document(phoneNumber)
         reference.getDocument { [weak self] (document, error) in
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
                 if let document = document, document.exists {
-                    let authData = AuthData(snapshot: document)
+                    let authData = FirebaseAuthData(snapshot: document)
                     if let isRegistered = authData.isRegistered {
                         if isRegistered {
                             self?.syncSignInAuth(authData: authData)  // Next level
@@ -104,7 +105,7 @@ class PhoneVerifyViewController: UIViewController {
                 let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID,
                         verificationCode: verificationCode)
                 Auth.auth().signIn(with: credential) { [weak self] (authResult, error) in
-                    DispatchQueue.main.sync {
+                    DispatchQueue.main.async {
                         if let error = error {
                             self?.showMessage(title: "Error", message: error.localizedDescription)
                             self?.view.isUserInteractionEnabled = true

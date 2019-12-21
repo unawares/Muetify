@@ -15,26 +15,26 @@ class ProfileContactsTableViewController: UITableViewController {
             title: "Мои контакты",
             description: "Стараемся максимально собрать на казахском"
         ),
-        Contact(
-            fullName: "Theodore Teddy",
-            statusInfo: "Hello Google"
-        ),
-        Contact(
-            fullName: "Theodore Teddy",
-            statusInfo: "Hello Google"
-        ),
-        Contact(
-            fullName: "Theodore Teddy",
-            statusInfo: "Hello Google"
-        ),
-        Contact(
-            fullName: "Theodore Teddy",
-            statusInfo: "Hello Google"
-        ),
-        Contact(
-            fullName: "Theodore Teddy",
-            statusInfo: "Hello Google"
-        )
+//        Contact(
+//            fullName: "Theodore Teddy",
+//            statusInfo: "Hello Google"
+//        ),
+//        Contact(
+//            fullName: "Theodore Teddy",
+//            statusInfo: "Hello Google"
+//        ),
+//        Contact(
+//            fullName: "Theodore Teddy",
+//            statusInfo: "Hello Google"
+//        ),
+//        Contact(
+//            fullName: "Theodore Teddy",
+//            statusInfo: "Hello Google"
+//        ),
+//        Contact(
+//            fullName: "Theodore Teddy",
+//            statusInfo: "Hello Google"
+//        )
     ]
 
     override func viewDidLoad() {

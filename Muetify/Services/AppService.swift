@@ -11,7 +11,7 @@ import Foundation
 
 final class AppService {
     
-    private let client = WebClient(baseUrl: "http://192.168.1.9:8000")
+    private let client = WebClient(baseUrl: "http://192.168.1.9:8080")
     
     func setToken(token: String) -> AppService {
         client.token = "Token \(token)"
@@ -120,6 +120,21 @@ final class AppService {
                 }
             }
             completion(filteredSongs, error)
+        }
+    }
+    
+    @discardableResult
+    func getContacts(completion: @escaping ([UserData], ServiceError?) -> ()) -> URLSessionDataTask? {
+        return client.load(path: "/contacts/", method: .get, params: [:]) { result, error in
+            let items = result as? [JSON]
+            let contacts = items?.map({ (item) -> UserData? in UserData(json: item as JSON?)}) ?? []
+            var filteredContacts: [UserData] = []
+            for contact in contacts {
+                if let contact = contact {
+                    filteredContacts.append(contact)
+                }
+            }
+            completion(filteredContacts, error)
         }
     }
     

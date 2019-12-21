@@ -10,6 +10,10 @@ import UIKit
 import AVKit
 
 
+func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
+    return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+}
+
 class SharedPlayerViewController: UIViewController {
     
     //    private var audioFiles: Array<String> = [
@@ -60,21 +64,20 @@ class SharedPlayerViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        sync()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        MainPlayer.shared.isBroadcasted = false
-        MainBroadcaster.shared.broadcastUrl = URL(string: "rtmp://localhost:1935/live/lol")
-        
         timer = Timer(timeInterval: 0.1,
                             target: self,
                             selector: #selector(update),
                             userInfo: nil,
                             repeats: true)
         RunLoop.current.add(timer, forMode: .common)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        timer.invalidate()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
     
     @objc func update() {
@@ -101,6 +104,7 @@ class SharedPlayerViewController: UIViewController {
     
     @IBAction func playerClicked(_ sender: Any) {
         if let navigationController = navigationController, let playerViewController = self.storyboard?.instantiateViewController(withIdentifier: "player") as? PlayerViewController {
+            playerViewController.song = MainPlayer.shared.source as? Song
             navigationController.show(playerViewController, sender: self)
         }
     }

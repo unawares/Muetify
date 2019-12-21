@@ -33,11 +33,12 @@ class PhoneViewController: UIViewController {
         
         if let token = UserDefaults.standard.string(forKey: "token") {
             AuthService().setToken(token: token).getUser { [weak self] user, error in
-                DispatchQueue.main.sync {
+                DispatchQueue.main.async {
                     if let error = error {
                         self?.showMessage(title: "Error", message: error.localizedDescription)
                     } else {
                         if let navigationController = self?.storyboard?.instantiateViewController(withIdentifier: "main") as? MainNavigationController {
+                            navigationController.modalPresentationStyle = .fullScreen
                             self?.present(navigationController, animated: true, completion: nil)
                         }
                     }
@@ -64,7 +65,7 @@ class PhoneViewController: UIViewController {
             
             authTask = AuthService().syncPhoneNumber(forPhoneNumber: PhoneNumberModel(phoneNumber: phoneNumber.numberString)) { [weak self] phoneNumberModel, error in
                 
-                DispatchQueue.main.sync {
+                DispatchQueue.main.async {
                     if let error = error {
                         self?.showMessage(title: "Error", message: error.localizedDescription)
                         self?.indicator.stopAnimating()

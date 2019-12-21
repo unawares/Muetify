@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseFirestore
 
-struct AuthData {
+struct FirebaseAuthData {
     
     var uuid: String?
     var data: String?
