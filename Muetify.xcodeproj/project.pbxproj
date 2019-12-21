@@ -11,6 +11,10 @@
 		0D0A07F423AA40CF00FB7944 /* AppModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A07F323AA40CF00FB7944 /* AppModels.swift */; };
 		0D0A07F623AA90BB00FB7944 /* ItemsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A07F523AA90BB00FB7944 /* ItemsHeaderTableViewCell.swift */; };
 		0D0A07FA23ABEE5500FB7944 /* ItemsAlbumSongsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A07F923ABEE5500FB7944 /* ItemsAlbumSongsHeaderTableViewCell.swift */; };
+		0D0A07FC23AE223B00FB7944 /* ItemsContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A07FB23AE223B00FB7944 /* ItemsContactTableViewCell.swift */; };
+		0D0A07FE23AE34C100FB7944 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A07FD23AE34C100FB7944 /* ProfileTableViewController.swift */; };
+		0D0A080223AE3CF400FB7944 /* ItemsContactHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A080123AE3CF400FB7944 /* ItemsContactHeaderTableViewCell.swift */; };
+		0D0A080423AE3D4E00FB7944 /* ContactHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A080323AE3D4E00FB7944 /* ContactHeader.swift */; };
 		0D2638672373F2190060D31A /* SongsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2638662373F2190060D31A /* SongsTableViewController.swift */; };
 		0D2638692375DBAF0060D31A /* AlbumsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2638682375DBAF0060D31A /* AlbumsCollectionViewController.swift */; };
 		0D26386B2376A6E20060D31A /* ItemsHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D26386A2376A6E20060D31A /* ItemsHeaderCollectionReusableView.swift */; };
@@ -39,9 +43,6 @@
 		0DC7DB1223A3C22F0028AB60 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1123A3C22F0028AB60 /* Contact.swift */; };
 		0DC7DB1423A3C7730028AB60 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1323A3C7730028AB60 /* PlayerViewController.swift */; };
 		0DC7DB1623A4C4DD0028AB60 /* AlbumSongsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1523A4C4DD0028AB60 /* AlbumSongsTableViewController.swift */; };
-		0DC7DB1A23A743780028AB60 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1923A743780028AB60 /* ProfileViewController.swift */; };
-		0DC7DB1C23A758020028AB60 /* ProfileSongsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1B23A758020028AB60 /* ProfileSongsTableViewController.swift */; };
-		0DC7DB1E23A758150028AB60 /* ProfileContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1D23A758150028AB60 /* ProfileContactsTableViewController.swift */; };
 		0DC7DB2023A78C4E0028AB60 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1F23A78C4E0028AB60 /* GoogleService-Info.plist */; };
 		0DC7DB2323A78F380028AB60 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DC7DB2223A78F380028AB60 /* Authentication.storyboard */; };
 		0DC7DB2523A78FD10028AB60 /* PhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB2423A78FD00028AB60 /* PhoneViewController.swift */; };
@@ -80,6 +81,10 @@
 		0D0A07F323AA40CF00FB7944 /* AppModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModels.swift; sourceTree = "<group>"; };
 		0D0A07F523AA90BB00FB7944 /* ItemsHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		0D0A07F923ABEE5500FB7944 /* ItemsAlbumSongsHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsAlbumSongsHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		0D0A07FB23AE223B00FB7944 /* ItemsContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsContactTableViewCell.swift; sourceTree = "<group>"; };
+		0D0A07FD23AE34C100FB7944 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		0D0A080123AE3CF400FB7944 /* ItemsContactHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsContactHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		0D0A080323AE3D4E00FB7944 /* ContactHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactHeader.swift; sourceTree = "<group>"; };
 		0D2638662373F2190060D31A /* SongsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsTableViewController.swift; sourceTree = "<group>"; };
 		0D2638682375DBAF0060D31A /* AlbumsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsCollectionViewController.swift; sourceTree = "<group>"; };
 		0D26386A2376A6E20060D31A /* ItemsHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -115,9 +120,6 @@
 		0DC7DB1123A3C22F0028AB60 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		0DC7DB1323A3C7730028AB60 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		0DC7DB1523A4C4DD0028AB60 /* AlbumSongsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumSongsTableViewController.swift; sourceTree = "<group>"; };
-		0DC7DB1923A743780028AB60 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		0DC7DB1B23A758020028AB60 /* ProfileSongsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSongsTableViewController.swift; sourceTree = "<group>"; };
-		0DC7DB1D23A758150028AB60 /* ProfileContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContactsTableViewController.swift; sourceTree = "<group>"; };
 		0DC7DB1F23A78C4E0028AB60 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0DC7DB2223A78F380028AB60 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		0DC7DB2423A78FD00028AB60 /* PhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneViewController.swift; sourceTree = "<group>"; };
@@ -182,10 +184,8 @@
 				0DC7DB0F23A3A9160028AB60 /* ContactsTableViewController.swift */,
 				0DC7DB1323A3C7730028AB60 /* PlayerViewController.swift */,
 				0DC7DB1523A4C4DD0028AB60 /* AlbumSongsTableViewController.swift */,
-				0DC7DB1923A743780028AB60 /* ProfileViewController.swift */,
-				0DC7DB1B23A758020028AB60 /* ProfileSongsTableViewController.swift */,
-				0DC7DB1D23A758150028AB60 /* ProfileContactsTableViewController.swift */,
 				0DC7DB4923A8E21E0028AB60 /* MainNavigationController.swift */,
+				0D0A07FD23AE34C100FB7944 /* ProfileTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -198,6 +198,8 @@
 				0D52B065237D7AE9005587A4 /* ItemsSongTableViewCell.swift */,
 				0D0A07F523AA90BB00FB7944 /* ItemsHeaderTableViewCell.swift */,
 				0D0A07F923ABEE5500FB7944 /* ItemsAlbumSongsHeaderTableViewCell.swift */,
+				0D0A07FB23AE223B00FB7944 /* ItemsContactTableViewCell.swift */,
+				0D0A080123AE3CF400FB7944 /* ItemsContactHeaderTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -210,6 +212,7 @@
 				0D52B061237C577D005587A4 /* Header.swift */,
 				0D52B063237D790A005587A4 /* Source.swift */,
 				0DC7DB1123A3C22F0028AB60 /* Contact.swift */,
+				0D0A080323AE3D4E00FB7944 /* ContactHeader.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -600,8 +603,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DC7DB1223A3C22F0028AB60 /* Contact.swift in Sources */,
+				0D0A080223AE3CF400FB7944 /* ItemsContactHeaderTableViewCell.swift in Sources */,
 				0D2EC89D237308630098D7E8 /* ViewController.swift in Sources */,
 				0DC7DB4A23A8E21E0028AB60 /* MainNavigationController.swift in Sources */,
+				0D0A07FC23AE223B00FB7944 /* ItemsContactTableViewCell.swift in Sources */,
 				0DC7DB4223A8AD800028AB60 /* AuthService.swift in Sources */,
 				0D2EC899237308630098D7E8 /* AppDelegate.swift in Sources */,
 				0DC7DB4623A8B0100028AB60 /* AuthenticationModels.swift in Sources */,
@@ -616,24 +621,23 @@
 				0D2638AC237862B30060D31A /* NetworkCollecitonViewController.swift in Sources */,
 				0D52B064237D790A005587A4 /* Source.swift in Sources */,
 				0D2638702376D1930060D31A /* SharedPlayerViewController.swift in Sources */,
-				0DC7DB1C23A758020028AB60 /* ProfileSongsTableViewController.swift in Sources */,
 				0DC7DB2723A79A600028AB60 /* PhoneVerifyViewController.swift in Sources */,
 				0DC7DB1023A3A9160028AB60 /* ContactsTableViewController.swift in Sources */,
 				0D52B062237C577D005587A4 /* Header.swift in Sources */,
 				0DC7DB4823A8C56F0028AB60 /* FirebaseAuthData.swift in Sources */,
 				0D2638672373F2190060D31A /* SongsTableViewController.swift in Sources */,
 				0D2EC8A3237308630098D7E8 /* Muetify.xcdatamodeld in Sources */,
-				0DC7DB1A23A743780028AB60 /* ProfileViewController.swift in Sources */,
+				0D0A07FE23AE34C100FB7944 /* ProfileTableViewController.swift in Sources */,
 				0D0A07F623AA90BB00FB7944 /* ItemsHeaderTableViewCell.swift in Sources */,
 				0DC7DB3123A8A84E0028AB60 /* WebClient.swift in Sources */,
 				0D0A07F423AA40CF00FB7944 /* AppModels.swift in Sources */,
 				0D52B05E237C55C0005587A4 /* Song.swift in Sources */,
 				0DC7DB2523A78FD10028AB60 /* PhoneViewController.swift in Sources */,
-				0DC7DB1E23A758150028AB60 /* ProfileContactsTableViewController.swift in Sources */,
 				0D0A07FA23ABEE5500FB7944 /* ItemsAlbumSongsHeaderTableViewCell.swift in Sources */,
 				0DC7DB2923A7A5DC0028AB60 /* SignUpViewController.swift in Sources */,
 				0D52B058237C0FDB005587A4 /* MainPlayer.swift in Sources */,
 				0D0A07F223AA406500FB7944 /* AppService.swift in Sources */,
+				0D0A080423AE3D4E00FB7944 /* ContactHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

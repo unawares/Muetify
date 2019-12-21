@@ -34,6 +34,21 @@ final class AppService {
     }
     
     @discardableResult
+    func getFriendSongs(friendId: Int, completion: @escaping ([SongReferenceData], ServiceError?) -> ()) -> URLSessionDataTask? {
+        return client.load(path: "/songs/friends/\(friendId)/", method: .get, params: [:]) { result, error in
+            let items = result as? [JSON]
+            let songs = items?.map({ (item) -> SongReferenceData? in SongReferenceData(json: item as JSON?)}) ?? []
+            var filteredSongs: [SongReferenceData] = []
+            for song in songs {
+                if let song = song {
+                    filteredSongs.append(song)
+                }
+            }
+            completion(filteredSongs, error)
+        }
+    }
+    
+    @discardableResult
     func getUserGenres(completion: @escaping ([UserGenreData], ServiceError?) -> ()) -> URLSessionDataTask? {
         return client.load(path: "/songs/genres/", method: .get, params: [:]) { result, error in
             let items = result as? [JSON]
@@ -123,6 +138,22 @@ final class AppService {
         }
     }
     
+    
+    @discardableResult
+    func addContacts(phoneNumbers: [String], completion: @escaping ([String], ServiceError?) -> ()) -> URLSessionDataTask? {
+        return client.load(path: "/contacts/virtual/add_phone_numbers/", method: .post, params: ["phone_numbers": phoneNumbers]) { result, error in
+            let items = (result as? JSON)?["phone_numbers"]
+            var filteredPhoneNumbers: [String] = []
+            if let items = items as? [String] {
+                for item in items {
+                    filteredPhoneNumbers.append(item)
+                }
+            }
+            completion(filteredPhoneNumbers, error)
+        }
+    }
+    
+    
     @discardableResult
     func getContacts(completion: @escaping ([UserData], ServiceError?) -> ()) -> URLSessionDataTask? {
         return client.load(path: "/contacts/", method: .get, params: [:]) { result, error in
@@ -135,6 +166,13 @@ final class AppService {
                 }
             }
             completion(filteredContacts, error)
+        }
+    }
+    
+    @discardableResult
+    func getContact(completion: @escaping (UserData?, ServiceError?) -> ()) -> URLSessionDataTask? {
+        return client.load(path: "/auth/user/", method: .get, params: [:]) { result, error in
+            completion(UserData(json: result as? JSON), error)
         }
     }
     
