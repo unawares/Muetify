@@ -16,68 +16,68 @@ class ContactsTableViewController: UITableViewController {
     
     var items: [Item] = []
     
-    func uploadContacts(phoneNumbers: [String]) {
-        AppService().setToken(token: token).addContacts(phoneNumbers: phoneNumbers) { [weak self] phoneNumbers, error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    self?.showMessage(title: "Error", message: error.localizedDescription)
-                    self?.refreshControl?.endRefreshing()
-                } else {
-                    self?.loadContacts()
-                }
-            }
-        }
-    }
+//    func uploadContacts(phoneNumbers: [String]) {
+//        AppService().setToken(token: token).addContacts(phoneNumbers: phoneNumbers) { [weak self] phoneNumbers, error in
+//            DispatchQueue.main.async {
+//                if let error = error {
+//                    self?.showMessage(title: "Error", message: error.localizedDescription)
+//                    self?.refreshControl?.endRefreshing()
+//                } else {
+//                    self?.loadContacts()
+//                }
+//            }
+//        }
+//    }
     
-    func processContacts(contacts: [CNContact]) {
-        let phoneNumberKit = PhoneNumberKit()
-        var phoneNumbers: [String] = []
-        
-        for contact in contacts {
-            if !contact.phoneNumbers.isEmpty {
-                for phoneNumber in contact.phoneNumbers {
-                    let phoneNumberStruct = phoneNumber.value as CNPhoneNumber
-                    let phoneNumberString = phoneNumberStruct.stringValue
-                    if let number = try? phoneNumberKit.parse(phoneNumberString) {
-                        phoneNumbers.append(phoneNumberKit.format(number, toType: .e164))
-                    }
-                }
-            }
-        }
-        
-        uploadContacts(phoneNumbers: phoneNumbers)
-    }
+//    func processContacts(contacts: [CNContact]) {
+//        let phoneNumberKit = PhoneNumberKit()
+//        var phoneNumbers: [String] = []
+//
+//        for contact in contacts {
+//            if !contact.phoneNumbers.isEmpty {
+//                for phoneNumber in contact.phoneNumbers {
+//                    let phoneNumberStruct = phoneNumber.value as CNPhoneNumber
+//                    let phoneNumberString = phoneNumberStruct.stringValue
+//                    if let number = try? phoneNumberKit.parse(phoneNumberString) {
+//                        phoneNumbers.append(phoneNumberKit.format(number, toType: .e164))
+//                    }
+//                }
+//            }
+//        }
+//
+//        uploadContacts(phoneNumbers: phoneNumbers)
+//    }
     
-    func fetchContacts() {
-        refreshControl?.beginRefreshing()
-        DispatchQueue.main.async { [weak self] in
-            let contactStore = CNContactStore()
-            
-            let keysToFetch = [CNContactPhoneNumbersKey]
-
-            var allContainers: [CNContainer] = []
-            
-            do {
-                allContainers = try contactStore.containers(matching: nil)
-            } catch {
-                print("Error fetching containers")
-            }
-
-            var results: [CNContact] = []
-
-            for container in allContainers {
-                let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
-                do {
-                    let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: keysToFetch as [CNKeyDescriptor])
-                    results.append(contentsOf: containerResults)
-                } catch {
-                    print("Error fetching results for container")
-                }
-            }
-            
-            self?.processContacts(contacts: results)
-        }
-    }
+//    func fetchContacts() {
+//        refreshControl?.beginRefreshing()
+//        DispatchQueue.main.async { [weak self] in
+//            let contactStore = CNContactStore()
+//
+//            let keysToFetch = [CNContactPhoneNumbersKey]
+//
+//            var allContainers: [CNContainer] = []
+//
+//            do {
+//                allContainers = try contactStore.containers(matching: nil)
+//            } catch {
+//                print("Error fetching containers")
+//            }
+//
+//            var results: [CNContact] = []
+//
+//            for container in allContainers {
+//                let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
+//                do {
+//                    let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: keysToFetch as [CNKeyDescriptor])
+//                    results.append(contentsOf: containerResults)
+//                } catch {
+//                    print("Error fetching results for container")
+//                }
+//            }
+//
+//            self?.processContacts(contacts: results)
+//        }
+//    }
     
     func showMessage(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -121,7 +121,8 @@ class ContactsTableViewController: UITableViewController {
         refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         tableView.addSubview(refreshControl!)
         
-        fetchContacts()
+//        DispatchQueue.main.async(execute: fetchContacts)
+        loadContacts()
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -176,7 +177,7 @@ class ContactsTableViewController: UITableViewController {
     }
 
     @objc func refresh(sender:AnyObject) {
-        fetchContacts()
+        loadContacts()
     }
     
 }

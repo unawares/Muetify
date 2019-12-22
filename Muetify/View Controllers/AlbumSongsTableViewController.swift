@@ -48,7 +48,7 @@ class AlbumSongsTableViewController: UITableViewController, ItemSongDelegate {
                 id: song.pk,
                 url: URL(string: song.media)!,
                 title: song.title,
-                singer: song.singers.joined(separator: ", "),
+                singers: song.singers.joined(separator: ", "),
                 duration: TimeInterval(song.duration)
             ))
         }
@@ -135,7 +135,7 @@ class AlbumSongsTableViewController: UITableViewController, ItemSongDelegate {
             
             itemView.indexPath = indexPath
             itemView.titleLabel.text = song.getTitle()
-            itemView.singerLabel.text = song.getSinger()
+            itemView.singerLabel.text = song.getSingers()
             itemView.timeLabel.text = String(format: "%02d:%02d", m, s)
             itemView.isAttached = song.getId() == MainPlayer.shared.source?.getId()
             

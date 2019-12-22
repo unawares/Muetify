@@ -17,7 +17,7 @@ protocol Source {
     
     func getTitle() -> String
         
-    func getSinger() -> String
+    func getSingers() -> String
     
     func getDuration() -> TimeInterval
     

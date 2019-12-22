@@ -8,14 +8,39 @@
 
 import UIKit
 import AVKit
-import mobileffmpeg
+import SocketIO
 
-class NetworkCollecitonViewController: UICollectionViewController {
+class NetworkCollecitonViewController: UICollectionViewController, SocketIOClientDelegate {
+    
+    var token: String!
+    
+    var broadcasts: [Broadcast] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        token = UserDefaults.standard.string(forKey: "token")
         self.collectionView.delegate = self
+        
+        SocketIOManager.shared.delegate = self
+        SocketIOManager.shared.setToken(token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXVpZFwiOiBcIjM5OTkyYzBmYTRkODRlZTdiNDg1ZjNkMDkxODU4MDM3XCIsIFwiY3JlYXRlZFwiOiBcIjIwMTktMTItMjFUMTQ6NDQ6MjMuMTgzXCIsIFwicGhvbmVfbnVtYmVyXCI6IFwiKzc3MDgxMzMwOTMxXCJ9In0.WfF66MvjYnVP4I5EznbQ2ellqkoIZaVVNEX1xs8DJvo")
     }
+
+    
+    func isReady() {
+        SocketIOManager.shared.broadcasts()
+    }
+    
+    func broadcasts(broadcasts: [Broadcast]) {
+        self.broadcasts = broadcasts
+        collectionView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if SocketIOManager.shared.isReady {
+            SocketIOManager.shared.broadcasts()
+        }
+    }
+    
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -23,31 +48,57 @@ class NetworkCollecitonViewController: UICollectionViewController {
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 13
+        return broadcasts.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "items_channel", for: indexPath)
+        
+        let broadcast = broadcasts[indexPath.row]
+        
+        if let channelItemView = cell as? ItemsChannelCollectionViewCell {
+            
+            channelItemView.fullNameLabel.text = "\(broadcast.user.firstName) \(broadcast.user.lastName)"
+            channelItemView.phoneNumberLabel.text = broadcast.user.phoneNumber
+            
+            if let urlString = broadcast.user.avatar, let url = URL(string: urlString) {
+                DispatchQueue.main.async {
+                    if let data = try? Data(contentsOf: url) {
+                        channelItemView.avatarImageView.image = UIImage(data: data)
+                    }
+                }
+            }
+            
+            if let urlString = broadcast.data?["poster"] as? String, let url = URL(string: urlString) {
+                DispatchQueue.main.async {
+                    if let data = try? Data(contentsOf: url) {
+                        channelItemView.backgroundImageView.image = UIImage(data: data)
+                    }
+                }
+            }
+            
+        }
+        
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView,
                                  viewForSupplementaryElementOfKind kind: String,
                                  at indexPath: IndexPath) -> UICollectionReusableView {
-      switch kind {
-      case UICollectionView.elementKindSectionHeader:
-        guard
-          let headerView = collectionView.dequeueReusableSupplementaryView(
-            ofKind: kind,
-            withReuseIdentifier: "items_header",
-            for: indexPath) as? ItemsHeaderCollectionReusableView
-          else {
-            fatalError("Invalid view type")
-        }
+        switch kind {
+            case UICollectionView.elementKindSectionHeader:
+                guard let headerView = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: "items_header",
+                    for: indexPath) as? ItemsNetworkHeaderCollectionReusableView else {
+                        fatalError("Invalid view type")
+                    }
+                headerView.syncSwitch()
+        
         return headerView
-      default:
+        default:
         assert(false, "Invalid element type")
-      }
+        }
     }
     
 }

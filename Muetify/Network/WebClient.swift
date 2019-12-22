@@ -9,7 +9,7 @@
 import Foundation
 
 
-typealias JSON = [String: Any]
+typealias JSON = [String: Any?]
 
 
 enum ServiceError: Error {

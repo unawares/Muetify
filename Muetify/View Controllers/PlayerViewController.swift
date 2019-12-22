@@ -71,7 +71,7 @@ class PlayerViewController: UIViewController {
             //            let (_, m, s) = secondsToHoursMinutesSeconds(seconds: Int(current))
             //            timeLabel.text = String(format: "%02d:%02d", m, s)
                         titleLabel.text = MainPlayer.shared.source?.getTitle()
-                        singerLabel.text = MainPlayer.shared.source?.getSinger()
+                        singerLabel.text = MainPlayer.shared.source?.getSingers()
                         
                     }
             sync()

@@ -43,7 +43,7 @@ class ProfileTableViewController: UITableViewController, ItemSongDelegate {
                     id: songData.pk,
                     url: URL(string: songData.media)!,
                     title: songData.title,
-                    singer: songData.singers.joined(separator: ", "),
+                    singers: songData.singers.joined(separator: ", "),
                     duration: TimeInterval(songData.duration)
                 )
                 
@@ -170,7 +170,7 @@ class ProfileTableViewController: UITableViewController, ItemSongDelegate {
             
             itemView.indexPath = indexPath
             itemView.titleLabel.text = song.getTitle()
-            itemView.singerLabel.text = song.getSinger()
+            itemView.singerLabel.text = song.getSingers()
             itemView.timeLabel.text = String(format: "%02d:%02d", m, s)
             itemView.isAttached = song.getId() == MainPlayer.shared.source?.getId()
             

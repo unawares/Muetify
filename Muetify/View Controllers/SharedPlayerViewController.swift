@@ -78,6 +78,8 @@ class SharedPlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        MainPlayer.shared.isBroadcasted = true
+//        MainBroadcaster.shared.broadcastUrl = URL(string: "rtmp://localhost:1935/live/lol")
     }
     
     @objc func update() {
@@ -91,7 +93,7 @@ class SharedPlayerViewController: UIViewController {
             let (_, m, s) = secondsToHoursMinutesSeconds(seconds: Int(current))
             timeLabel.text = String(format: "%02d:%02d", m, s)
             titleLabel.text = MainPlayer.shared.source?.getTitle()
-            singerLabel.text = MainPlayer.shared.source?.getSinger()
+            singerLabel.text = MainPlayer.shared.source?.getSingers()
         }
         sync()
     }

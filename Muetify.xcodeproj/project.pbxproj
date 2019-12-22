@@ -15,6 +15,11 @@
 		0D0A07FE23AE34C100FB7944 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A07FD23AE34C100FB7944 /* ProfileTableViewController.swift */; };
 		0D0A080223AE3CF400FB7944 /* ItemsContactHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A080123AE3CF400FB7944 /* ItemsContactHeaderTableViewCell.swift */; };
 		0D0A080423AE3D4E00FB7944 /* ContactHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A080323AE3D4E00FB7944 /* ContactHeader.swift */; };
+		0D0A080623AEA0D400FB7944 /* MainBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A080523AEA0D400FB7944 /* MainBroadcaster.swift */; };
+		0D0A080823AEA58800FB7944 /* Broadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A080723AEA58800FB7944 /* Broadcast.swift */; };
+		0D0A080A23AEA8C600FB7944 /* SocketIOClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A080923AEA8C600FB7944 /* SocketIOClient.swift */; };
+		0D0A080E23AED3C200FB7944 /* ItemsNetworkHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A080D23AED3C200FB7944 /* ItemsNetworkHeaderCollectionReusableView.swift */; };
+		0D0A081023AF306F00FB7944 /* ItemsChannelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0A080F23AF306F00FB7944 /* ItemsChannelCollectionViewCell.swift */; };
 		0D2638672373F2190060D31A /* SongsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2638662373F2190060D31A /* SongsTableViewController.swift */; };
 		0D2638692375DBAF0060D31A /* AlbumsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2638682375DBAF0060D31A /* AlbumsCollectionViewController.swift */; };
 		0D26386B2376A6E20060D31A /* ItemsHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D26386A2376A6E20060D31A /* ItemsHeaderCollectionReusableView.swift */; };
@@ -85,6 +90,11 @@
 		0D0A07FD23AE34C100FB7944 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		0D0A080123AE3CF400FB7944 /* ItemsContactHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsContactHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		0D0A080323AE3D4E00FB7944 /* ContactHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactHeader.swift; sourceTree = "<group>"; };
+		0D0A080523AEA0D400FB7944 /* MainBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBroadcaster.swift; sourceTree = "<group>"; };
+		0D0A080723AEA58800FB7944 /* Broadcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Broadcast.swift; sourceTree = "<group>"; };
+		0D0A080923AEA8C600FB7944 /* SocketIOClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOClient.swift; sourceTree = "<group>"; };
+		0D0A080D23AED3C200FB7944 /* ItemsNetworkHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsNetworkHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		0D0A080F23AF306F00FB7944 /* ItemsChannelCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsChannelCollectionViewCell.swift; sourceTree = "<group>"; };
 		0D2638662373F2190060D31A /* SongsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsTableViewController.swift; sourceTree = "<group>"; };
 		0D2638682375DBAF0060D31A /* AlbumsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsCollectionViewController.swift; sourceTree = "<group>"; };
 		0D26386A2376A6E20060D31A /* ItemsHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -200,6 +210,8 @@
 				0D0A07F923ABEE5500FB7944 /* ItemsAlbumSongsHeaderTableViewCell.swift */,
 				0D0A07FB23AE223B00FB7944 /* ItemsContactTableViewCell.swift */,
 				0D0A080123AE3CF400FB7944 /* ItemsContactHeaderTableViewCell.swift */,
+				0D0A080D23AED3C200FB7944 /* ItemsNetworkHeaderCollectionReusableView.swift */,
+				0D0A080F23AF306F00FB7944 /* ItemsChannelCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -213,6 +225,7 @@
 				0D52B063237D790A005587A4 /* Source.swift */,
 				0DC7DB1123A3C22F0028AB60 /* Contact.swift */,
 				0D0A080323AE3D4E00FB7944 /* ContactHeader.swift */,
+				0D0A080723AEA58800FB7944 /* Broadcast.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -306,6 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				0D52B057237C0FDB005587A4 /* MainPlayer.swift */,
+				0D0A080523AEA0D400FB7944 /* MainBroadcaster.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -344,6 +358,7 @@
 			children = (
 				0DC7DB4123A8AD800028AB60 /* AuthService.swift */,
 				0D0A07F123AA406500FB7944 /* AppService.swift */,
+				0D0A080923AEA8C600FB7944 /* SocketIOClient.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -611,6 +626,7 @@
 				0D2EC899237308630098D7E8 /* AppDelegate.swift in Sources */,
 				0DC7DB4623A8B0100028AB60 /* AuthenticationModels.swift in Sources */,
 				0D52B066237D7AE9005587A4 /* ItemsSongTableViewCell.swift in Sources */,
+				0D0A081023AF306F00FB7944 /* ItemsChannelCollectionViewCell.swift in Sources */,
 				0D26386B2376A6E20060D31A /* ItemsHeaderCollectionReusableView.swift in Sources */,
 				0D52B060237C5771005587A4 /* Item.swift in Sources */,
 				0DC7DB2F23A8A81A0028AB60 /* Reachability.swift in Sources */,
@@ -624,7 +640,9 @@
 				0DC7DB2723A79A600028AB60 /* PhoneVerifyViewController.swift in Sources */,
 				0DC7DB1023A3A9160028AB60 /* ContactsTableViewController.swift in Sources */,
 				0D52B062237C577D005587A4 /* Header.swift in Sources */,
+				0D0A080A23AEA8C600FB7944 /* SocketIOClient.swift in Sources */,
 				0DC7DB4823A8C56F0028AB60 /* FirebaseAuthData.swift in Sources */,
+				0D0A080823AEA58800FB7944 /* Broadcast.swift in Sources */,
 				0D2638672373F2190060D31A /* SongsTableViewController.swift in Sources */,
 				0D2EC8A3237308630098D7E8 /* Muetify.xcdatamodeld in Sources */,
 				0D0A07FE23AE34C100FB7944 /* ProfileTableViewController.swift in Sources */,
@@ -632,11 +650,13 @@
 				0DC7DB3123A8A84E0028AB60 /* WebClient.swift in Sources */,
 				0D0A07F423AA40CF00FB7944 /* AppModels.swift in Sources */,
 				0D52B05E237C55C0005587A4 /* Song.swift in Sources */,
+				0D0A080E23AED3C200FB7944 /* ItemsNetworkHeaderCollectionReusableView.swift in Sources */,
 				0DC7DB2523A78FD10028AB60 /* PhoneViewController.swift in Sources */,
 				0D0A07FA23ABEE5500FB7944 /* ItemsAlbumSongsHeaderTableViewCell.swift in Sources */,
 				0DC7DB2923A7A5DC0028AB60 /* SignUpViewController.swift in Sources */,
 				0D52B058237C0FDB005587A4 /* MainPlayer.swift in Sources */,
 				0D0A07F223AA406500FB7944 /* AppService.swift in Sources */,
+				0D0A080623AEA0D400FB7944 /* MainBroadcaster.swift in Sources */,
 				0D0A080423AE3D4E00FB7944 /* ContactHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

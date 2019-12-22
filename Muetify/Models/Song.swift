@@ -14,14 +14,14 @@ class Song : Item, Source {
     var id: Int
     var url: URL
     var title: String
-    var singer: String
+    var singers: String
     var duration: TimeInterval
     
-    init(id: Int, url: URL, title: String, singer: String, duration: TimeInterval) {
+    init(id: Int, url: URL, title: String, singers: String, duration: TimeInterval) {
         self.id = id
         self.url = url
         self.title = title
-        self.singer = singer
+        self.singers = singers
         self.duration = duration
     }
     
@@ -37,8 +37,8 @@ class Song : Item, Source {
         return title
     }
     
-    func getSinger() -> String {
-        return singer
+    func getSingers() -> String {
+        return singers
     }
     
     func getDuration() -> TimeInterval {
