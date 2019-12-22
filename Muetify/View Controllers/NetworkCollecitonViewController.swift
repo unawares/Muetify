@@ -20,9 +20,8 @@ class NetworkCollecitonViewController: UICollectionViewController, SocketIOClien
         super.viewDidLoad()
         token = UserDefaults.standard.string(forKey: "token")
         self.collectionView.delegate = self
-        
         SocketIOManager.shared.delegate = self
-        SocketIOManager.shared.setToken(token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjoie1widXVpZFwiOiBcIjM5OTkyYzBmYTRkODRlZTdiNDg1ZjNkMDkxODU4MDM3XCIsIFwiY3JlYXRlZFwiOiBcIjIwMTktMTItMjFUMTQ6NDQ6MjMuMTgzXCIsIFwicGhvbmVfbnVtYmVyXCI6IFwiKzc3MDgxMzMwOTMxXCJ9In0.WfF66MvjYnVP4I5EznbQ2ellqkoIZaVVNEX1xs8DJvo")
+        SocketIOManager.shared.setToken(token: token)
     }
 
     
@@ -99,6 +98,11 @@ class NetworkCollecitonViewController: UICollectionViewController, SocketIOClien
         default:
         assert(false, "Invalid element type")
         }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let broadcast = broadcasts[indexPath.row]
+        MainPlayer.shared.join(broadcast: broadcast)
     }
     
 }

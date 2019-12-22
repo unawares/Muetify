@@ -29,6 +29,8 @@ class MainPlayer : PlayerIOClientDeletate {
         
     }
     
+    var broadcast: Broadcast?
+    
     var isPlaying: Bool = false
     
     var isBroadcasted: Bool = false {
@@ -45,41 +47,32 @@ class MainPlayer : PlayerIOClientDeletate {
     
     private init () {
         player = AVPlayer()
-        SocketIOManager.shared.playerDelegate = self
     }
     
     func play() {
         isPlaying = true
         player.play()
-//        if isBroadcasted, let url = source?.getUrl() {
-//            MainBroadcaster.shared.stop()
-//            MainBroadcaster.shared.start(url: url, padding: Int(player.currentTime().seconds))
-//        }
         if isBroadcasted {
             SocketIOManager.shared.playSong()
         }
+        leave()
     }
     
     func pause() {
         isPlaying = false
         player.pause()
-//        if isBroadcasted {
-//            MainBroadcaster.shared.stop()
-//        }
         if isBroadcasted {
             SocketIOManager.shared.pauseSong()
         }
+        leave()
     }
     
     func seek(padding: Double) {
         player.seek(to: CMTime(seconds: padding, preferredTimescale: 60000))
-//        if isBroadcasted, let url = source?.getUrl() {
-//            MainBroadcaster.shared.stop()
-//            MainBroadcaster.shared.start(url: url, padding: Int(player.currentTime().seconds))
-//        }
         if isBroadcasted {
             SocketIOManager.shared.seekSong(padding: padding)
         }
+        leave()
     }
     
     func getDuration() -> CMTime? {
@@ -95,19 +88,52 @@ class MainPlayer : PlayerIOClientDeletate {
     }
     
     func setSourceFromBroadcast(source: Source) {
-        print("TEST", "Set Source")
+        if broadcast != nil {
+            self.source = source
+        }
     }
     
     func playFromBroadcast() {
-        print("TEST", "Play Source")
+        if broadcast != nil {
+            isPlaying = true
+            player.play()
+            if isBroadcasted {
+                SocketIOManager.shared.playSong()
+            }
+        }
     }
     
     func pauseFromBroadcast() {
-        print("TEST", "Pause Source")
+        if broadcast != nil {
+            isPlaying = false
+            player.pause()
+            if isBroadcasted {
+                SocketIOManager.shared.pauseSong()
+            }
+        }
     }
     
     func seekFromBroadcast(padding: Double) {
-        print("TEST", "Seek Source")
+        if broadcast != nil {
+            player.seek(to: CMTime(seconds: padding, preferredTimescale: 60000))
+            if isBroadcasted {
+                SocketIOManager.shared.seekSong(padding: padding)
+            }
+        }
+    }
+    
+    func join(broadcast: Broadcast) {
+        SocketIOManager.shared.playerDelegate = self
+        SocketIOManager.shared.join(broadcastId: broadcast.id)
+        self.broadcast = broadcast
+    }
+    
+    func leave() {
+        SocketIOManager.shared.playerDelegate = nil
+        if let broadcast = broadcast {
+            SocketIOManager.shared.leave(broadcastId: broadcast.id)
+        }
+        broadcast = nil
     }
     
 }
