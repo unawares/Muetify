@@ -16,37 +16,8 @@ func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
 
 class SharedPlayerViewController: UIViewController {
     
-    //    private var audioFiles: Array<String> = [
-    //        "song1"
-    //    ]
-    //    private var audioEngine: AVAudioEngine = AVAudioEngine()
-    //    private var mixer: AVAudioMixerNode = AVAudioMixerNode()
-
-    //    func play() {
-    //        DispatchQueue.global(qos: .background).async {
-    //            self.audioEngine.attach(self.mixer)
-    //            self.audioEngine.connect(self.mixer, to: self.audioEngine.outputNode, format: nil)
-    //
-    //            try! self.audioEngine.start()
-    //
-    //            for audioFile in self.audioFiles {
-    //                let audioPlayer = AVAudioPlayerNode()
-    //
-    //                self.audioEngine.attach(audioPlayer)
-    //                self.audioEngine.connect(audioPlayer, to: self.mixer, format: nil)
-    //
-    //                let filePath = Bundle.main.path(forResource: audioFile, ofType: "mp3")!
-    //                let fileUrl: URL = URL(fileURLWithPath: filePath)
-    //
-    //                let file : AVAudioFile = try! AVAudioFile.init(forReading: fileUrl.absoluteURL)
-    //
-    //                audioPlayer.scheduleFile(file, at: nil, completionHandler: nil)
-    //                audioPlayer.play(at: nil)
-    //
-    //            }
-    //
-    //        }
-    //    }
+    static var shared: SharedPlayerViewController?
+    var playerDelegate: MainPlayerDelegate?
     
     @IBOutlet weak var playerButton: UIButton!
     @IBOutlet weak var progressView: UIProgressView!
@@ -78,8 +49,7 @@ class SharedPlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        MainPlayer.shared.isBroadcasted = true
-//        MainBroadcaster.shared.broadcastUrl = URL(string: "rtmp://localhost:1935/live/lol")
+        SharedPlayerViewController.shared = self
     }
     
     @objc func update() {
@@ -106,6 +76,7 @@ class SharedPlayerViewController: UIViewController {
     
     @IBAction func playerClicked(_ sender: Any) {
         if let navigationController = navigationController, let playerViewController = self.storyboard?.instantiateViewController(withIdentifier: "player") as? PlayerViewController {
+            playerViewController.playerDelegate = playerDelegate
             playerViewController.song = MainPlayer.shared.source as? Song
             navigationController.show(playerViewController, sender: self)
         }

@@ -342,7 +342,27 @@
                     <view key="view" contentMode="scaleToFill" id="e95-8k-btg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="nsc-vw-PBa">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_logo" translatesAutoresizingMaskIntoConstraints="NO" id="20U-Vo-hs0">
+                                <rect key="frame" x="87" y="328" width="240" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="T9A-e1-djR"/>
+                                    <constraint firstAttribute="height" constant="240" id="msY-57-hIb"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="nsc-vw-PBa" firstAttribute="trailing" secondItem="hDQ-Ab-ur7" secondAttribute="trailing" id="6bG-Bw-sky"/>
+                            <constraint firstItem="20U-Vo-hs0" firstAttribute="centerX" secondItem="e95-8k-btg" secondAttribute="centerX" id="Gdy-QL-nMQ"/>
+                            <constraint firstAttribute="bottom" secondItem="nsc-vw-PBa" secondAttribute="bottom" id="Lkk-gp-iQM"/>
+                            <constraint firstItem="nsc-vw-PBa" firstAttribute="leading" secondItem="hDQ-Ab-ur7" secondAttribute="leading" id="hB5-lp-WPB"/>
+                            <constraint firstItem="nsc-vw-PBa" firstAttribute="top" secondItem="e95-8k-btg" secondAttribute="top" id="ldw-Fx-7hz"/>
+                            <constraint firstItem="20U-Vo-hs0" firstAttribute="centerY" secondItem="e95-8k-btg" secondAttribute="centerY" id="mFe-JD-sIr"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="hDQ-Ab-ur7"/>
                     </view>
                 </viewController>

@@ -15,39 +15,7 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="qRs-ed-V8K">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DY8-cm-D6V">
-                                <rect key="frame" x="87" y="328" width="240" height="240"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_logo" translatesAutoresizingMaskIntoConstraints="NO" id="fw0-Xb-Gfr">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="240"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="240" id="BlH-uG-w8X"/>
-                                            <constraint firstAttribute="height" constant="240" id="HLD-JX-Psq"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="fw0-Xb-Gfr" secondAttribute="bottom" id="I6h-bb-iva"/>
-                                    <constraint firstItem="fw0-Xb-Gfr" firstAttribute="leading" secondItem="DY8-cm-D6V" secondAttribute="leading" id="OU3-Lo-61L"/>
-                                    <constraint firstAttribute="width" constant="240" id="Rqs-ZR-UjG"/>
-                                    <constraint firstItem="fw0-Xb-Gfr" firstAttribute="top" secondItem="DY8-cm-D6V" secondAttribute="top" id="TEC-AO-nfk"/>
-                                    <constraint firstAttribute="trailing" secondItem="fw0-Xb-Gfr" secondAttribute="trailing" id="hKK-dD-AYW"/>
-                                    <constraint firstAttribute="height" constant="240" id="scD-1b-2Bu"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="qRs-ed-V8K" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Bep-Ve-Qcc"/>
-                            <constraint firstItem="qRs-ed-V8K" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Grc-bE-bT3"/>
-                            <constraint firstItem="DY8-cm-D6V" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="fhH-ye-8rR"/>
-                            <constraint firstAttribute="bottom" secondItem="qRs-ed-V8K" secondAttribute="bottom" id="n31-dA-Nii"/>
-                            <constraint firstItem="DY8-cm-D6V" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="pil-Qd-aKe"/>
-                            <constraint firstItem="qRs-ed-V8K" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="spc-if-HNj"/>
-                        </constraints>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -56,8 +24,4 @@
             <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="background" width="1106" height="1051"/>
-        <image name="main_logo" width="614" height="483"/>
-    </resources>
 </document>

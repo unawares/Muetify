@@ -45,6 +45,8 @@ struct SongData: Decodable {
     var media: String
     var duration: Float
     var singers: [String]
+    var poster: String?
+    var text: String
     
 }
 
@@ -61,6 +63,8 @@ extension SongData {
             self.media = json["media"] as! String
             self.duration = (json["duration"] as? NSNumber)?.floatValue ?? 0
             self.singers = json["singers"] as! [String]
+            self.poster = json["poster"] as? String
+            self.text = json["text"] as! String
         } else {
             return nil
         }

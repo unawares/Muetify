@@ -23,6 +23,8 @@ class PlayerViewController: UIViewController {
     @IBOutlet weak var progressView: CustomView!
     @IBOutlet weak var progressWidthConstraint: NSLayoutConstraint!
     
+    var playerDelegate: MainPlayerDelegate?
+    
     var timer: Timer!
     var isDragging = false
     
@@ -53,6 +55,7 @@ class PlayerViewController: UIViewController {
             (MainPlayer.shared.isPlaying ?
                 UIImage.init(named: "pause_music") : UIImage.init(named: "play_music")),
             for: .normal)
+        broadcastButton.alpha = MainPlayer.shared.isBroadcasted ? 1 : 0.3
     }
     
     func setProgress(progress: Float) {
@@ -124,13 +127,23 @@ class PlayerViewController: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let songTextViewController = segue.destination as? SongTextViewController {
+            songTextViewController.song = song
+        }
+    }
+    
     @IBAction func previousButtonClicked(_ sender: Any) {
+        playerDelegate?.onPrevious()
     }
     
     @IBAction func nextButtonClicked(_ sender: Any) {
+        playerDelegate?.onNext()
     }
     
     @IBAction func broadcastButtonClicked(_ sender: Any) {
+        MainPlayer.shared.isBroadcasted = !MainPlayer.shared.isBroadcasted
+        sync()
     }
     
 }

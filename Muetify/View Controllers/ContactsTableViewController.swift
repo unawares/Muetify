@@ -156,8 +156,12 @@ class ContactsTableViewController: UITableViewController {
                 DispatchQueue.main.async {
                     if let data = try? Data(contentsOf: url) {
                         itemView?.avatarImageView.image = UIImage(data: data)
+                    } else {
+                        itemView?.avatarImageView.image = nil
                     }
                 }
+            } else {
+                itemView?.avatarImageView.image = nil
             }
             
             cell = itemView

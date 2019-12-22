@@ -17,6 +17,7 @@ class MainNavigationController: UINavigationController {
         super.viewDidLoad()
         if let tokenAuthData = tokenAuthData {
             UserDefaults.standard.set(tokenAuthData.token, forKey: "token")
+            SocketIOManager.shared.setToken(token: tokenAuthData.token)
         }
     }
 

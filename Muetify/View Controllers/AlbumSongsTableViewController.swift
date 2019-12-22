@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AlbumSongsTableViewController: UITableViewController, ItemSongDelegate, BroadcastPlayerDelegate {
+class AlbumSongsTableViewController: UITableViewController, ItemSongDelegate, BroadcastPlayerDelegate, MainPlayerDelegate, CurrentContextDelegate {
     
     var token: String!
     var album: AlbumBase?
@@ -29,6 +29,7 @@ class AlbumSongsTableViewController: UITableViewController, ItemSongDelegate, Br
         RunLoop.current.add(timer, forMode: .common)
         tableView.reloadData()
         MainPlayer.shared.delegate = self
+        MainPlayer.shared.currentContextDelegate = self
     }
     
     func changedSource() {
@@ -54,7 +55,9 @@ class AlbumSongsTableViewController: UITableViewController, ItemSongDelegate, Br
                 url: URL(string: song.media)!,
                 title: song.title,
                 singers: song.singers.joined(separator: ", "),
-                duration: TimeInterval(song.duration)
+                duration: TimeInterval(song.duration),
+                poster: URL(string: song.poster ?? ""),
+                text: song.text
             ))
         }
         refreshControl?.endRefreshing()
@@ -145,7 +148,7 @@ class AlbumSongsTableViewController: UITableViewController, ItemSongDelegate, Br
             itemView.isAttached = song.getId() == MainPlayer.shared.source?.getId()
             
             if itemView.isAttached && selectedIndexPath?.row != indexPath.row {
-                playButtonClicked(indexPath: indexPath)
+                startedPlay(indexPath: indexPath)
             }
             
             itemView.delegate = self
@@ -159,8 +162,10 @@ class AlbumSongsTableViewController: UITableViewController, ItemSongDelegate, Br
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if items[indexPath.row] is Song {
+        if let song = items[indexPath.row] as? Song {
             if let navigationController = navigationController, let playerViewController = self.storyboard?.instantiateViewController(withIdentifier: "player") as? PlayerViewController {
+                playerViewController.playerDelegate = self
+                playerViewController.song = song
                 navigationController.show(playerViewController, sender: self)
             }
             tableView.deselectRow(at: indexPath, animated: true)
@@ -189,7 +194,7 @@ class AlbumSongsTableViewController: UITableViewController, ItemSongDelegate, Br
         }
     }
     
-    func playButtonClicked(indexPath: IndexPath) {
+    func startedPlay(indexPath: IndexPath) {
         UIView.performWithoutAnimation {
             tableView.beginUpdates()
             if let selectedIndexPath = selectedIndexPath {
@@ -200,6 +205,69 @@ class AlbumSongsTableViewController: UITableViewController, ItemSongDelegate, Br
             selectedIndexPath = indexPath
             tableView.endUpdates()
         }
+    }
+    
+    func playButtonClicked(indexPath: IndexPath) {
+        startedPlay(indexPath: indexPath)
+        MainPlayer.shared.playerDelegate = self
+    }
+    
+    func onNext() {
+        if let indexPath = selectedIndexPath {
+            var index = indexPath.row + 1
+            
+            while (index < items.count && !(items[index] is Song)) {
+                index += 1
+            }
+            
+            if index >= items.count {
+                index = 0
+            }
+            
+            while (index < items.count && !(items[index] is Song)) {
+                index += 1
+            }
+            
+            if index < items.count {
+                if let song = items[index] as? Song {
+                    let indexPath = IndexPath(row: index, section: indexPath.section)
+                    MainPlayer.shared.source = song
+                    MainPlayer.shared.play()
+                    startedPlay(indexPath: indexPath)
+                }
+            }
+        }
+    }
+    
+    func onPrevious() {
+        if let indexPath = selectedIndexPath {
+            var index = indexPath.row - 1
+            
+            while (index >= 0 && !(items[index] is Song)) {
+                index -= 1
+            }
+            
+            if index < 0 {
+                index = items.count - 1
+            }
+            
+            while (index >= 0 && !(items[index] is Song)) {
+                index -= 1
+            }
+            
+            if index >= 0 {
+                if let song = items[index] as? Song {
+                    let indexPath = IndexPath(row: index, section: indexPath.section)
+                    MainPlayer.shared.source = song
+                    MainPlayer.shared.play()
+                    startedPlay(indexPath: indexPath)
+                }
+            }
+        }
+    }
+    
+    func onFinish() {
+        tableView.reloadData()
     }
     
     @objc func refresh(sender:AnyObject) {

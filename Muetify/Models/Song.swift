@@ -16,13 +16,17 @@ class Song : Item, Source {
     var title: String
     var singers: String
     var duration: TimeInterval
+    var poster: URL?
+    var text: String
     
-    init(id: Int, url: URL, title: String, singers: String, duration: TimeInterval) {
+    init(id: Int, url: URL, title: String, singers: String, duration: TimeInterval, poster: URL?, text: String) {
         self.id = id
         self.url = url
         self.title = title
         self.singers = singers
         self.duration = duration
+        self.poster = poster
+        self.text = text
     }
     
     func getId() -> Int {
@@ -43,6 +47,10 @@ class Song : Item, Source {
     
     func getDuration() -> TimeInterval {
         return duration
+    }
+    
+    func getText() -> String {
+        return text
     }
     
 }

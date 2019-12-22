@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileTableViewController: UITableViewController, ItemSongDelegate, BroadcastPlayerDelegate {
+class ProfileTableViewController: UITableViewController, ItemSongDelegate, BroadcastPlayerDelegate, MainPlayerDelegate, CurrentContextDelegate {
 
     var token: String!
     var friend: Contact!
@@ -27,6 +27,7 @@ class ProfileTableViewController: UITableViewController, ItemSongDelegate, Broad
         RunLoop.current.add(timer, forMode: .common)
         tableView.reloadData()
         MainPlayer.shared.delegate = self
+        MainPlayer.shared.currentContextDelegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -49,7 +50,9 @@ class ProfileTableViewController: UITableViewController, ItemSongDelegate, Broad
                     url: URL(string: songData.media)!,
                     title: songData.title,
                     singers: songData.singers.joined(separator: ", "),
-                    duration: TimeInterval(songData.duration)
+                    duration: TimeInterval(songData.duration),
+                    poster: URL(string: songData.poster ?? ""),
+                    text: songData.text
                 )
                 
                 if let folder = songReference.folderData {
@@ -152,9 +155,22 @@ class ProfileTableViewController: UITableViewController, ItemSongDelegate, Broad
         case is ContactHeader:
             
             let header = item as! ContactHeader
-            let itemView = tableView.dequeueReusableCell(withIdentifier: "items_contact_header", for: indexPath) as! ItemsContactHeaderTableViewCell
-            itemView.fullNameLabel.text = header.fullName
-            itemView.phoneNumberLabel.text = header.phoneNumber
+            let itemView = tableView.dequeueReusableCell(withIdentifier: "items_contact_header", for: indexPath) as? ItemsContactHeaderTableViewCell
+            itemView?.fullNameLabel.text = header.fullName
+            itemView?.phoneNumberLabel.text = header.phoneNumber
+            
+            if let urlString = friend.avatar, let url = URL(string: urlString) {
+                DispatchQueue.main.async {
+                    if let data = try? Data(contentsOf: url) {
+                        itemView?.avatarImageView.image = UIImage(data: data)
+                    } else {
+                        itemView?.avatarImageView.image = nil
+                    }
+                }
+            } else {
+                itemView?.avatarImageView.image = nil
+            }
+            
             cell = itemView
             
         case is Header:
@@ -180,7 +196,7 @@ class ProfileTableViewController: UITableViewController, ItemSongDelegate, Broad
             itemView.isAttached = song.getId() == MainPlayer.shared.source?.getId()
             
             if itemView.isAttached && selectedIndexPath?.row != indexPath.row {
-                playButtonClicked(indexPath: indexPath)
+                startedPlay(indexPath: indexPath)
             }
 
             itemView.delegate = self
@@ -195,8 +211,10 @@ class ProfileTableViewController: UITableViewController, ItemSongDelegate, Broad
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if items[indexPath.row] is Song {
+        if let song = items[indexPath.row] as? Song {
             if let navigationController = navigationController, let playerViewController = self.storyboard?.instantiateViewController(withIdentifier: "player") as? PlayerViewController {
+                playerViewController.playerDelegate = self
+                playerViewController.song = song
                 navigationController.show(playerViewController, sender: self)
             }
             tableView.deselectRow(at: indexPath, animated: true)
@@ -221,7 +239,7 @@ class ProfileTableViewController: UITableViewController, ItemSongDelegate, Broad
         }
     }
     
-    func playButtonClicked(indexPath: IndexPath) {
+    func startedPlay(indexPath: IndexPath) {
         UIView.performWithoutAnimation {
             tableView.beginUpdates()
             if let selectedIndexPath = selectedIndexPath {
@@ -234,8 +252,71 @@ class ProfileTableViewController: UITableViewController, ItemSongDelegate, Broad
         }
     }
     
+    func playButtonClicked(indexPath: IndexPath) {
+        startedPlay(indexPath: indexPath)
+        MainPlayer.shared.playerDelegate = self
+    }
+    
+    func onNext() {
+        if let indexPath = selectedIndexPath {
+            var index = indexPath.row + 1
+            
+            while (index < items.count && !(items[index] is Song)) {
+                index += 1
+            }
+            
+            if index >= items.count {
+                index = 0
+            }
+            
+            while (index < items.count && !(items[index] is Song)) {
+                index += 1
+            }
+            
+            if index < items.count {
+                if let song = items[index] as? Song {
+                    let indexPath = IndexPath(row: index, section: indexPath.section)
+                    MainPlayer.shared.source = song
+                    MainPlayer.shared.play()
+                    startedPlay(indexPath: indexPath)
+                }
+            }
+        }
+    }
+    
+    func onPrevious() {
+        if let indexPath = selectedIndexPath {
+            var index = indexPath.row - 1
+            
+            while (index >= 0 && !(items[index] is Song)) {
+                index -= 1
+            }
+            
+            if index < 0 {
+                index = items.count - 1
+            }
+            
+            while (index >= 0 && !(items[index] is Song)) {
+                index -= 1
+            }
+            
+            if index >= 0 {
+                if let song = items[index] as? Song {
+                    let indexPath = IndexPath(row: index, section: indexPath.section)
+                    MainPlayer.shared.source = song
+                    MainPlayer.shared.play()
+                    startedPlay(indexPath: indexPath)
+                }
+            }
+        }
+    }
+    
     @IBAction func closeButtonClicked(_ sender: Any) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    func onFinish() {
+        tableView.reloadData()
     }
     
     @objc func refresh(sender:AnyObject) {

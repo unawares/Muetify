@@ -11,17 +11,39 @@ import UIKit
 import AVKit
 
 
+protocol MainPlayerDelegate {
+    
+    func onNext()
+    
+    func onPrevious()
+    
+}
+
+protocol CurrentContextDelegate {
+    
+    func onFinish()
+    
+}
+
 protocol BroadcastPlayerDelegate {
     
     func changedSource()
     
 }
 
-class MainPlayer : PlayerIOClientDeletate {
+class MainPlayer : PlayerIOClientDelegate {
     
     static var shared = MainPlayer()
     
     var delegate: BroadcastPlayerDelegate?
+    
+    var playerDelegate: MainPlayerDelegate? {
+        didSet {
+            SharedPlayerViewController.shared?.playerDelegate = playerDelegate
+        }
+    }
+    
+    var currentContextDelegate: CurrentContextDelegate?
     
     private var player: AVPlayer!
     
@@ -59,6 +81,7 @@ class MainPlayer : PlayerIOClientDeletate {
     
     private init () {
         player = AVPlayer()
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: nil)
     }
     
     func play() {
@@ -145,6 +168,11 @@ class MainPlayer : PlayerIOClientDeletate {
             SocketIOManager.shared.leave(broadcastId: broadcast.id)
         }
         broadcast = nil
+    }
+    
+    @objc func playerDidFinishPlaying() {
+        playerDelegate?.onNext()
+        currentContextDelegate?.onFinish()
     }
     
 }

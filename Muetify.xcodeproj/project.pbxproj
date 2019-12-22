@@ -45,6 +45,8 @@
 		0D52B064237D790A005587A4 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D52B063237D790A005587A4 /* Source.swift */; };
 		0D52B066237D7AE9005587A4 /* ItemsSongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D52B065237D7AE9005587A4 /* ItemsSongTableViewCell.swift */; };
 		0D9EBB0823AFB604006A5CA6 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9EBB0723AFB604006A5CA6 /* InitialViewController.swift */; };
+		0D9EBB0F23AFE099006A5CA6 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D9EBB0E23AFE099006A5CA6 /* Settings.storyboard */; };
+		0D9EBB1123B00138006A5CA6 /* SongTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9EBB1023B00138006A5CA6 /* SongTextViewController.swift */; };
 		0DC7DB1023A3A9160028AB60 /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB0F23A3A9160028AB60 /* ContactsTableViewController.swift */; };
 		0DC7DB1223A3C22F0028AB60 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1123A3C22F0028AB60 /* Contact.swift */; };
 		0DC7DB1423A3C7730028AB60 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1323A3C7730028AB60 /* PlayerViewController.swift */; };
@@ -128,6 +130,8 @@
 		0D52B063237D790A005587A4 /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		0D52B065237D7AE9005587A4 /* ItemsSongTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsSongTableViewCell.swift; sourceTree = "<group>"; };
 		0D9EBB0723AFB604006A5CA6 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		0D9EBB0E23AFE099006A5CA6 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		0D9EBB1023B00138006A5CA6 /* SongTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTextViewController.swift; sourceTree = "<group>"; };
 		0DC7DB0F23A3A9160028AB60 /* ContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		0DC7DB1123A3C22F0028AB60 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		0DC7DB1323A3C7730028AB60 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 				0DC7DB1523A4C4DD0028AB60 /* AlbumSongsTableViewController.swift */,
 				0DC7DB4923A8E21E0028AB60 /* MainNavigationController.swift */,
 				0D0A07FD23AE34C100FB7944 /* ProfileTableViewController.swift */,
+				0D9EBB1023B00138006A5CA6 /* SongTextViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 				0D2EC8A6237308630098D7E8 /* LaunchScreen.storyboard */,
 				0DC7DB2223A78F380028AB60 /* Authentication.storyboard */,
 				0D2EC89E237308630098D7E8 /* Main.storyboard */,
+				0D9EBB0E23AFE099006A5CA6 /* Settings.storyboard */,
 				0D2EC8A9237308630098D7E8 /* Info.plist */,
 				0D2EC8A1237308630098D7E8 /* Muetify.xcdatamodeld */,
 			);
@@ -510,6 +516,7 @@
 				0DC7DB2323A78F380028AB60 /* Authentication.storyboard in Resources */,
 				0D2EC8A0237308630098D7E8 /* Main.storyboard in Resources */,
 				0D2638752376D7090060D31A /* song2.mp3 in Resources */,
+				0D9EBB0F23AFE099006A5CA6 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,6 +669,7 @@
 				0D0A07F223AA406500FB7944 /* AppService.swift in Sources */,
 				0D0A080623AEA0D400FB7944 /* MainBroadcaster.swift in Sources */,
 				0D0A080423AE3D4E00FB7944 /* ContactHeader.swift in Sources */,
+				0D9EBB1123B00138006A5CA6 /* SongTextViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
