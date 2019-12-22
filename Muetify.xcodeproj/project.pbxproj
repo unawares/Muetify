@@ -44,6 +44,7 @@
 		0D52B062237C577D005587A4 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D52B061237C577D005587A4 /* Header.swift */; };
 		0D52B064237D790A005587A4 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D52B063237D790A005587A4 /* Source.swift */; };
 		0D52B066237D7AE9005587A4 /* ItemsSongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D52B065237D7AE9005587A4 /* ItemsSongTableViewCell.swift */; };
+		0D9EBB0823AFB604006A5CA6 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9EBB0723AFB604006A5CA6 /* InitialViewController.swift */; };
 		0DC7DB1023A3A9160028AB60 /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB0F23A3A9160028AB60 /* ContactsTableViewController.swift */; };
 		0DC7DB1223A3C22F0028AB60 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1123A3C22F0028AB60 /* Contact.swift */; };
 		0DC7DB1423A3C7730028AB60 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1323A3C7730028AB60 /* PlayerViewController.swift */; };
@@ -126,6 +127,7 @@
 		0D52B061237C577D005587A4 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		0D52B063237D790A005587A4 /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		0D52B065237D7AE9005587A4 /* ItemsSongTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsSongTableViewCell.swift; sourceTree = "<group>"; };
+		0D9EBB0723AFB604006A5CA6 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		0DC7DB0F23A3A9160028AB60 /* ContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		0DC7DB1123A3C22F0028AB60 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		0DC7DB1323A3C7730028AB60 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				0DC7DB2423A78FD00028AB60 /* PhoneViewController.swift */,
 				0DC7DB2623A79A600028AB60 /* PhoneVerifyViewController.swift */,
 				0DC7DB2823A7A5DC0028AB60 /* SignUpViewController.swift */,
+				0D9EBB0723AFB604006A5CA6 /* InitialViewController.swift */,
 			);
 			path = "Authentication View Controllers";
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				0DC7DB2F23A8A81A0028AB60 /* Reachability.swift in Sources */,
 				0DC7DB1423A3C7730028AB60 /* PlayerViewController.swift in Sources */,
 				0DC7DB1623A4C4DD0028AB60 /* AlbumSongsTableViewController.swift in Sources */,
+				0D9EBB0823AFB604006A5CA6 /* InitialViewController.swift in Sources */,
 				0D26386D2376AAAF0060D31A /* ItemsAlbumCollectionViewCell.swift in Sources */,
 				0D2638692375DBAF0060D31A /* AlbumsCollectionViewController.swift in Sources */,
 				0D2638AC237862B30060D31A /* NetworkCollecitonViewController.swift in Sources */,

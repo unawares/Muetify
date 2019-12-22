@@ -38,6 +38,10 @@ class AlbumsCollectionViewController: UICollectionViewController, FilterDelegate
         collectionView.delegate = self
         filterSelected(filterType: .GENRES)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        collectionView.reloadData()
+    }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1

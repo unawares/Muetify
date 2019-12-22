@@ -124,6 +124,10 @@ class ContactsTableViewController: UITableViewController {
 //        DispatchQueue.main.async(execute: fetchContacts)
         loadContacts()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

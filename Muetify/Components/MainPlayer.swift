@@ -10,9 +10,18 @@ import Foundation
 import UIKit
 import AVKit
 
+
+protocol BroadcastPlayerDelegate {
+    
+    func changedSource()
+    
+}
+
 class MainPlayer : PlayerIOClientDeletate {
     
     static var shared = MainPlayer()
+    
+    var delegate: BroadcastPlayerDelegate?
     
     private var player: AVPlayer!
     
@@ -24,6 +33,9 @@ class MainPlayer : PlayerIOClientDeletate {
                 if isBroadcasted {
                     SocketIOManager.shared.setSource(source: source)
                 }
+            }
+            if broadcast != nil {
+                delegate?.changedSource()
             }
         }
         
@@ -123,9 +135,8 @@ class MainPlayer : PlayerIOClientDeletate {
     }
     
     func join(broadcast: Broadcast) {
-        SocketIOManager.shared.playerDelegate = self
-        SocketIOManager.shared.join(broadcastId: broadcast.id)
         self.broadcast = broadcast
+        SocketIOManager.shared.playerDelegate = self
     }
     
     func leave() {

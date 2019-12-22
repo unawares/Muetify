@@ -9,7 +9,7 @@
 import UIKit
 import AVKit
 
-class SongsTableViewController: UITableViewController, ItemSongDelegate {
+class SongsTableViewController: UITableViewController, ItemSongDelegate, BroadcastPlayerDelegate {
         
     var token: String!
     
@@ -19,17 +19,22 @@ class SongsTableViewController: UITableViewController, ItemSongDelegate {
     var timer: Timer!
     
     override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
         timer = Timer(timeInterval: 0.1,
                             target: self,
                             selector: #selector(update),
                             userInfo: nil,
                             repeats: true)
         RunLoop.current.add(timer, forMode: .common)
+        tableView.reloadData()
+        MainPlayer.shared.delegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         timer.invalidate()
+    }
+    
+    func changedSource() {
+        tableView.reloadData()
     }
     
     func foldItems(songReferences: [SongReferenceData]) {

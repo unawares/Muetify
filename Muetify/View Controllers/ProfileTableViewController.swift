@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileTableViewController: UITableViewController, ItemSongDelegate {
+class ProfileTableViewController: UITableViewController, ItemSongDelegate, BroadcastPlayerDelegate {
 
     var token: String!
     var friend: Contact!
@@ -19,17 +19,22 @@ class ProfileTableViewController: UITableViewController, ItemSongDelegate {
     var timer: Timer!
     
     override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
         timer = Timer(timeInterval: 0.1,
                             target: self,
                             selector: #selector(update),
                             userInfo: nil,
                             repeats: true)
         RunLoop.current.add(timer, forMode: .common)
+        tableView.reloadData()
+        MainPlayer.shared.delegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         timer.invalidate()
+    }
+    
+    func changedSource() {
+        tableView.reloadData()
     }
     
     func foldItems(songReferences: [SongReferenceData]) {

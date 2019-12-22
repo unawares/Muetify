@@ -10,20 +10,24 @@ import UIKit
 import AVKit
 import SocketIO
 
-class NetworkCollecitonViewController: UICollectionViewController, SocketIOClientDelegate {
+class NetworkCollecitonViewController: UICollectionViewController, SocketIOClientDelegate, BroadcastAccessDelegate {
     
     var token: String!
     
     var broadcasts: [Broadcast] = []
+    var selectedBroadcast: Broadcast?
+    
+    func showMessage(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         token = UserDefaults.standard.string(forKey: "token")
         self.collectionView.delegate = self
-        SocketIOManager.shared.delegate = self
-        SocketIOManager.shared.setToken(token: token)
     }
-
     
     func isReady() {
         SocketIOManager.shared.broadcasts()
@@ -35,9 +39,13 @@ class NetworkCollecitonViewController: UICollectionViewController, SocketIOClien
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        SocketIOManager.shared.delegate = self
+        SocketIOManager.shared.setToken(token: token)
+        SocketIOManager.shared.broadcastAccessDelegate = self
         if SocketIOManager.shared.isReady {
             SocketIOManager.shared.broadcasts()
         }
+        collectionView.reloadData()
     }
     
 
@@ -102,7 +110,21 @@ class NetworkCollecitonViewController: UICollectionViewController, SocketIOClien
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let broadcast = broadcasts[indexPath.row]
-        MainPlayer.shared.join(broadcast: broadcast)
+        SocketIOManager.shared.join(broadcastId: broadcast.id)
+        selectedBroadcast = broadcast
+    }
+    
+    func joined() {
+        if let broadcast = selectedBroadcast {
+            MainPlayer.shared.join(broadcast: broadcast)
+            selectedBroadcast = nil
+        }
+        
+    }
+    
+    func canNotJoin() {
+        selectedBroadcast = nil
+        showMessage(title: "Can not connect", message: "This user listens to you")
     }
     
 }

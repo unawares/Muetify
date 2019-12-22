@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AlbumSongsTableViewController: UITableViewController, ItemSongDelegate {
+class AlbumSongsTableViewController: UITableViewController, ItemSongDelegate, BroadcastPlayerDelegate {
     
     var token: String!
     var album: AlbumBase?
@@ -21,13 +21,18 @@ class AlbumSongsTableViewController: UITableViewController, ItemSongDelegate {
     var timer: Timer!
     
     override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
         timer = Timer(timeInterval: 0.1,
                             target: self,
                             selector: #selector(update),
                             userInfo: nil,
                             repeats: true)
         RunLoop.current.add(timer, forMode: .common)
+        tableView.reloadData()
+        MainPlayer.shared.delegate = self
+    }
+    
+    func changedSource() {
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
