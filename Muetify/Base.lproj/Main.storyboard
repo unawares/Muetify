@@ -122,9 +122,9 @@
                                 </connections>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_logo" translatesAutoresizingMaskIntoConstraints="NO" id="si7-Aa-dql">
-                                <rect key="frame" x="155.66666666666666" y="0.0" width="64" height="64"/>
+                                <rect key="frame" x="123.66666666666669" y="0.0" width="128" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="si7-Aa-dql" secondAttribute="height" multiplier="1:1" id="bh1-RD-cJf"/>
+                                    <constraint firstAttribute="width" secondItem="si7-Aa-dql" secondAttribute="height" multiplier="2:1" id="bh1-RD-cJf"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -143,7 +143,7 @@
                             <constraint firstItem="7dQ-U8-p6L" firstAttribute="top" secondItem="V5w-wG-bsq" secondAttribute="top" constant="16" id="nJE-yT-BPh"/>
                             <constraint firstAttribute="trailing" secondItem="lpi-vm-tBq" secondAttribute="trailing" id="uHN-PC-bCd"/>
                             <constraint firstItem="V8z-mZ-DRg" firstAttribute="top" secondItem="V5w-wG-bsq" secondAttribute="top" id="v2n-3f-1qB"/>
-                            <constraint firstItem="si7-Aa-dql" firstAttribute="bottom" secondItem="Cvg-Al-3KY" secondAttribute="bottom" id="xin-7n-VkT"/>
+                            <constraint firstItem="si7-Aa-dql" firstAttribute="bottom" secondItem="V5w-wG-bsq" secondAttribute="bottom" id="xin-7n-VkT"/>
                             <constraint firstAttribute="bottom" secondItem="7dQ-U8-p6L" secondAttribute="bottom" constant="16" id="zC7-kH-wKt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Cvg-Al-3KY"/>
@@ -449,10 +449,10 @@
                                 <rect key="frame" x="67.666666666666686" y="566" width="240" height="12"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Vy-13-pXY" customClass="CustomView" customModule="Muetify" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="64" height="12"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="12"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="64" id="bhK-tF-0TW"/>
+                                            <constraint firstAttribute="width" id="bhK-tF-0TW"/>
                                         </constraints>
                                     </view>
                                 </subviews>

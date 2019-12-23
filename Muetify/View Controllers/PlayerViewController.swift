@@ -10,7 +10,17 @@ import UIKit
 
 class PlayerViewController: UIViewController {
     
-    var song: Song?
+    var song: Song? {
+        
+        didSet {
+            isSynchronized = MainPlayer.shared.source?.getId() == song?.getId()
+            if isReady {
+                titleLabel.text = song?.getTitle()
+                singerLabel.text = song?.getSingers()
+            }
+        }
+        
+    }
 
     @IBOutlet weak var songImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -27,9 +37,14 @@ class PlayerViewController: UIViewController {
     
     var timer: Timer!
     var isDragging = false
+    var isSynchronized = false
+    var isReady = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.text = song?.getTitle()
+        singerLabel.text = song?.getSingers()
+        isReady = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,27 +78,33 @@ class PlayerViewController: UIViewController {
     }
     
     @objc func update() {
-        if !isDragging {
-            if let current = MainPlayer.shared.getCurrentTime()?.seconds, let total = MainPlayer.shared.getDuration()?.seconds {
+        if isSynchronized {
+            if !isDragging {
+                if let current = MainPlayer.shared.getCurrentTime()?.seconds, let total = MainPlayer.shared.getDuration()?.seconds {
                         if (total != Double.nan) {
                             setProgress(progress: max(0, min(Float(current / total), 1)))
                         } else {
                             setProgress(progress: 0)
                         }
-                        
-            //            let (_, m, s) = secondsToHoursMinutesSeconds(seconds: Int(current))
-            //            timeLabel.text = String(format: "%02d:%02d", m, s)
+
                         titleLabel.text = MainPlayer.shared.source?.getTitle()
                         singerLabel.text = MainPlayer.shared.source?.getSingers()
-                        
                     }
-            sync()
+                sync()
+            }
         }
     }
     
     @IBAction func playerButtonClicked(_ sender: UIButton) {
-        MainPlayer.shared.isPlaying ? MainPlayer.shared.pause() : MainPlayer.shared.play()
-        sync()
+        if isSynchronized {
+            MainPlayer.shared.isPlaying ? MainPlayer.shared.pause() : MainPlayer.shared.play()
+            sync()
+        } else {
+            MainPlayer.shared.source = song
+            MainPlayer.shared.play()
+            sync()
+            isSynchronized = true
+        }
     }
     
     

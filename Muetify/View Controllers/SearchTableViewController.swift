@@ -99,6 +99,9 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate, Ite
         searchBar.delegate = self
         
         loadSongs()
+        
+        let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongPress))
+        view.addGestureRecognizer(longPressGesture)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -279,6 +282,96 @@ class SearchTableViewController: UITableViewController, UISearchBarDelegate, Ite
         searchActive = false;
         view.endEditing(true)
         loadSongs()
+    }
+    
+    
+    func showFolderOptions(onSelect: ((UserFolderData?) -> Void)?){
+        let folders = MySongs.shared.folders
+        
+        let alert = UIAlertController(
+            title: title,
+            message: "Выберите папку",
+            preferredStyle: .actionSheet)
+
+        for i in 0 ..< folders.count {
+            alert.addAction(UIAlertAction(title: folders[i].getTitle(), style: .default, handler: { (_) in
+                onSelect?(folders[i])
+            }))
+        }
+        alert.addAction(UIAlertAction(title: "Другие", style: .destructive, handler: { (_) in
+            onSelect?(nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showActionsFor(song: Song) {
+        let alert = UIAlertController(title: song.getTitle(), message: "Выберите действие", preferredStyle: .actionSheet)
+        
+        if MySongs.shared.hasSong(id: song.id) {
+            
+            alert.addAction(UIAlertAction(title: "Удалить", style: .default, handler: { (_) in
+                AppService().setToken(token: self.token).removeSong(songId: song.id) { [weak self] error in
+                        DispatchQueue.main.async {
+                            if let error = error {
+                                self?.showMessage(title: "Ошибка", message: error.localizedDescription)
+                            } else {
+                                MySongs.shared.removeSong(id: song.id)
+                                self?.loadSongs()
+                            }
+                        }
+                }
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Переместить", style: .default, handler: { (_) in
+                self.showFolderOptions() { folder in
+                    AppService().setToken(token: self.token).addSong(songId: song.id, folderId: folder?.pk) { [weak self] error in
+                            DispatchQueue.main.async {
+                                if let error = error {
+                                    self?.showMessage(title: "Ошибка", message: error.localizedDescription)
+                                } else {
+                                    self?.loadSongs()
+                                }
+                            }
+                    }
+                }
+            }))
+            
+        } else {
+            
+            alert.addAction(UIAlertAction(title: "Добавить", style: .default, handler: { (_) in
+                self.showFolderOptions() { folder in
+                    AppService().setToken(token: self.token).addSong(songId: song.id, folderId: folder?.pk) { [weak self] error in
+                            DispatchQueue.main.async {
+                                if let error = error {
+                                    self?.showMessage(title: "Ошибка", message: error.localizedDescription)
+                                } else {
+                                    MySongs.shared.addSong(id: song.id)
+                                    self?.loadSongs()
+                                }
+                            }
+                    }
+                }
+            }))
+            
+        }
+        
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer){
+        if gestureRecognizer.state == .ended {
+            let touchPoint = gestureRecognizer.location(in: self.tableView)
+            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+                if let song = items[indexPath.row] as? Song {
+                    showActionsFor(song: song)
+                }
+            }
+        }
     }
     
 

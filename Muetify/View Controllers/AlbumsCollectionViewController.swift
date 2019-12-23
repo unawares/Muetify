@@ -37,6 +37,9 @@ class AlbumsCollectionViewController: UICollectionViewController, FilterDelegate
         token = UserDefaults.standard.string(forKey: "token")
         collectionView.delegate = self
         filterSelected(filterType: .GENRES)
+        
+        let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        view.addGestureRecognizer(lpgr)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,11 +69,6 @@ class AlbumsCollectionViewController: UICollectionViewController, FilterDelegate
             
             itemView?.titleLabel.text = album.albumBase.getTitle()
             itemView?.countLabel.text = String(album.albumBase.getCount())
-            
-            if selectedFilter == .FOLDERS {
-                let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-                itemView?.contentView.addGestureRecognizer(lpgr)
-            }
             
             cell = itemView
         case is Add:
@@ -131,6 +129,7 @@ class AlbumsCollectionViewController: UICollectionViewController, FilterDelegate
         case .FOLDERS:
             filterRequestTask = appService.getUserFolders { [weak self] userFolderDatas, error in
                 DispatchQueue.main.async {
+                    MySongs.shared.folders = userFolderDatas
                     if let error = error {
                         self?.showMessage(title: "Error", message: error.localizedDescription)
                         self?.indicator.stopAnimating()
@@ -194,6 +193,18 @@ class AlbumsCollectionViewController: UICollectionViewController, FilterDelegate
         }
     }
     
+    
+    func updateFolders() {
+        AppService().setToken(token: token).getUserFolders { [weak self] userFolderDatas, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self?.showMessage(title: "Error", message: error.localizedDescription)
+                } else {
+                    MySongs.shared.folders = userFolderDatas
+                }
+            }
+        }
+    }
     
     func showCreateForm() {
         let alertController = UIAlertController(title: "Добавить новый альбом", message: nil, preferredStyle: .alert)
@@ -299,16 +310,18 @@ class AlbumsCollectionViewController: UICollectionViewController, FilterDelegate
     
     
     @objc func handleLongPress(gesture : UILongPressGestureRecognizer!) {
-        if gesture.state != .ended {
-            return
-        }
-        let p = gesture.location(in: self.collectionView)
-        if let indexPath = self.collectionView.indexPathForItem(at: p) {
-            if let album = items[indexPath.row] as? Album {
-                showActionsFor(album: album)
+        if selectedFilter == .FOLDERS {
+            if gesture.state != .ended {
+                return
             }
-        } else {
-            print("couldn't find index path")
+            let p = gesture.location(in: self.collectionView)
+            if let indexPath = self.collectionView.indexPathForItem(at: p) {
+                if let album = items[indexPath.row] as? Album {
+                    showActionsFor(album: album)
+                }
+            } else {
+                print("couldn't find index path")
+            }
         }
     }
     

@@ -14,6 +14,7 @@ class MySongs {
     static var shared = MySongs()
     
     var songs = Set<Int>()
+    var folders: [UserFolderData] = []
     
     func addSong(id: Int) {
         songs.insert(id)

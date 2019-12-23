@@ -22,9 +22,9 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fyv-6m-knj">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="678"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="wRg-VS-bc7">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wRg-VS-bc7">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
-                                                <color key="backgroundColor" red="0.26274509800000001" green="0.0" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" white="0.90793009739999997" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="qye-LI-SZ3"/>
                                                 </constraints>
@@ -139,7 +139,7 @@
                                                     <constraint firstAttribute="height" constant="24" id="zZj-np-fJp"/>
                                                 </constraints>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal" backgroundImage="close_white"/>
+                                                <state key="normal" backgroundImage="close_dark"/>
                                                 <connections>
                                                     <action selector="closeButtonClicked:" destination="HFO-LX-Oyo" eventType="touchUpInside" id="s9g-ME-0q8"/>
                                                 </connections>
@@ -229,8 +229,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background" width="1106" height="1051"/>
-        <image name="close_white" width="142" height="142"/>
+        <image name="close_dark" width="142" height="142"/>
         <image name="contacts" width="24" height="24"/>
         <image name="edit" width="142" height="142"/>
     </resources>

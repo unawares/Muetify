@@ -225,4 +225,22 @@ final class AppService {
         }
     }
     
+    @discardableResult
+    func addSong(songId: Int, folderId: Int?, completion: @escaping (ServiceError?) -> ()) -> URLSessionDataTask? {
+        var params: [String : Any] = [:]
+        if let folderId = folderId {
+            params["folder"] = folderId
+        }
+        return client.load(path: "/songs/user/\(songId)/add/", method: .post, params: params) { result, error in
+            completion(error)
+        }
+    }
+    
+    @discardableResult
+    func removeSong(songId: Int, completion: @escaping (ServiceError?) -> ()) -> URLSessionDataTask? {
+        return client.load(path: "/songs/user/\(songId)/remove/", method: .delete, params: [:]) { result, error in
+            completion(error)
+        }
+    }
+    
 }
