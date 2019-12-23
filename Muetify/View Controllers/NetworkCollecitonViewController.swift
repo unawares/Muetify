@@ -127,6 +127,12 @@ class NetworkCollecitonViewController: UICollectionViewController, SocketIOClien
         showMessage(title: "Can not connect", message: "This user listens to you")
     }
     
+    @IBAction func settingsButtonClicked(_ sender: Any) {
+        if let viewController = storyboard?.instantiateViewController(withIdentifier: "settings") as? SettingsViewController {
+            navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+    
 }
 
 

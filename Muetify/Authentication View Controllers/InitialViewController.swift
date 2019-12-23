@@ -16,11 +16,16 @@ class InitialViewController: UIViewController {
         if let token = UserDefaults.standard.string(forKey: "token") {
             AuthService().setToken(token: token).getUser { [weak self] user, error in
                 DispatchQueue.main.async {
-                    if let navigationController = self?.storyboard?.instantiateViewController(withIdentifier: (error != nil) ? "auth" : "main") as? MainNavigationController {
+                    if let navigationController = self?.storyboard?.instantiateViewController(withIdentifier: (error != nil) ? "auth" : "main") {
                         navigationController.modalPresentationStyle = .fullScreen
                         self?.present(navigationController, animated: true, completion: nil)
                     }
                 }
+            }
+        } else {
+            if let navigationController = self.storyboard?.instantiateViewController(withIdentifier: "auth") {
+                navigationController.modalPresentationStyle = .fullScreen
+                self.present(navigationController, animated: true, completion: nil)
             }
         }
         

@@ -75,7 +75,7 @@ class PhoneViewController: UIViewController {
             UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
             if let viewController = self?.storyboard?.instantiateViewController(withIdentifier: "phone_verify") as? PhoneVerifyViewController {
                 viewController.phoneNumber = phoneNumber
-                self?.navigationController?.pushViewController(viewController, animated: true)
+                self?.present(viewController, animated: true, completion: nil)
             }
         }
     }

@@ -19,6 +19,25 @@ final class AppService {
     }
 
     @discardableResult
+    func getAllSongs(search: String, completion: @escaping ([SongData], ServiceError?) -> ()) -> URLSessionDataTask? {
+        let params = [
+            "ordering": "title",
+            "search": search
+        ]
+        return client.load(path: "/songs/all/", method: .get, params: params) { result, error in
+            let items = result as? [JSON]
+            let songs = items?.map({ (item) -> SongData? in SongData(json: item as JSON?)}) ?? []
+            var filteredSongs: [SongData] = []
+            for song in songs {
+                if let song = song {
+                    filteredSongs.append(song)
+                }
+            }
+            completion(filteredSongs, error)
+        }
+    }
+    
+    @discardableResult
     func getUserSongs(completion: @escaping ([SongReferenceData], ServiceError?) -> ()) -> URLSessionDataTask? {
         return client.load(path: "/songs/user/", method: .get, params: [:]) { result, error in
             let items = result as? [JSON]

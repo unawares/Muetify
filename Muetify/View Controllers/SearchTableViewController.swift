@@ -1,20 +1,23 @@
 //
-//  SongsTableViewController.swift
+//  SearchTableViewController.swift
 //  Muetify
 //
-//  Created by Theodore Teddy on 11/7/19.
+//  Created by Theodore Teddy on 12/23/19.
 //  Copyright © 2019 Theodore Teddy. All rights reserved.
 //
 
 import UIKit
-import AVKit
 
-class SongsTableViewController: UITableViewController, ItemSongDelegate, BroadcastPlayerDelegate, MainPlayerDelegate, CurrentContextDelegate {
+class SearchTableViewController: UITableViewController, UISearchBarDelegate, ItemSongDelegate, BroadcastPlayerDelegate, MainPlayerDelegate, CurrentContextDelegate {
         
     var token: String!
     
     var items: [Item] = []
     var selectedIndexPath: IndexPath?
+    
+    var searchActive: Bool = false
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var timer: Timer!
     
@@ -37,71 +40,6 @@ class SongsTableViewController: UITableViewController, ItemSongDelegate, Broadca
     func changedSource() {
         tableView.reloadData()
     }
-    
-    func foldItems(songReferences: [SongReferenceData]) {
-        var foldedSongs: [FolderData: [Song]] = [:]
-        var unfoldedSongs: [Song] = []
-        
-        for songReference in songReferences {
-            if let songData = songReference.songData {
-                
-                let song = Song(
-                    id: songData.pk,
-                    url: URL(string: songData.media)!,
-                    title: songData.title,
-                    singers: songData.singers.joined(separator: ", "),
-                    duration: TimeInterval(songData.duration),
-                    poster: URL(string: songData.poster ?? ""),
-                    text: songData.text
-                )
-                
-                if let folder = songReference.folderData {
-                    if foldedSongs[folder] == nil {
-                        foldedSongs[folder] = []
-                    }
-                    foldedSongs[folder]?.append(song)
-                } else {
-                    unfoldedSongs.append(song)
-                }
-                
-            }
-        }
-        
-        items.removeAll()
-        
-        for folder in Array(foldedSongs.keys).sorted(by: <) {
-            items.append(Header(
-                title: folder.title,
-                description: folder.description
-            ))
-            for song in foldedSongs[folder]! {
-                items.append(song)
-            }
-        }
-        
-        if unfoldedSongs.count > 0 {
-            
-            items.append(Header(
-                title: "Другие",
-                description: nil
-            ))
-            
-            for song in unfoldedSongs {
-                items.append(song)
-            }
-            
-        }
-        
-        if items.count == 0 {
-            items.append(Header(
-                title: "Пусто",
-                description: "Добавьте песни."
-            ))
-        }
-        
-        tableView.reloadData()
-        refreshControl?.endRefreshing()
-    }
 
     func showMessage(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -109,17 +47,46 @@ class SongsTableViewController: UITableViewController, ItemSongDelegate, Broadca
         self.present(alert, animated: true, completion: nil)
     }
     
+    func initItems(songs: [SongData]) {
+        items.removeAll()
+        
+        for songData in songs {
+            let song = Song(
+                id: songData.pk,
+                url: URL(string: songData.media)!,
+                title: songData.title,
+                singers: songData.singers.joined(separator: ", "),
+                duration: TimeInterval(songData.duration),
+                poster: URL(string: songData.poster ?? ""),
+                text: songData.text
+            )
+            items.append(song)
+        }
+        
+        if items.count == 0 {
+            items.append(Empty())
+        }
+        
+        tableView.reloadData()
+        refreshControl?.endRefreshing()
+    }
+    
     func loadSongs() {
         refreshControl?.beginRefreshing()
-        AppService().setToken(token: token).getUserSongs { [weak self] songReference, error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    self?.showMessage(title: "Error", message: error.localizedDescription)
-                    self?.refreshControl?.endRefreshing()
-                } else {
-                    self?.foldItems(songReferences: songReference)
+        if let searchText = searchBar.text, searchText.count > 0 {
+            AppService().setToken(token: token).getAllSongs(search: searchText) { [weak self] songs, error in
+                DispatchQueue.main.async {
+                    if let error = error {
+                        self?.showMessage(title: "Error", message: error.localizedDescription)
+                        self?.refreshControl?.endRefreshing()
+                        self?.initItems(songs: [])
+                    } else {
+                        self?.initItems(songs: songs)
+                    }
                 }
             }
+        } else {
+            initItems(songs: [])
         }
     }
 
@@ -129,6 +96,7 @@ class SongsTableViewController: UITableViewController, ItemSongDelegate, Broadca
         
         refreshControl?.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         tableView.addSubview(refreshControl!)
+        searchBar.delegate = self
         
         loadSongs()
     }
@@ -147,14 +115,9 @@ class SongsTableViewController: UITableViewController, ItemSongDelegate, Broadca
         var cell: UITableViewCell?
         
         switch item {
-        case is Header:
+        case is Empty:
             
-            let header = item as! Header
-            let itemView = tableView.dequeueReusableCell(withIdentifier: "items_header", for: indexPath) as! ItemsHeaderTableViewCell
-            itemView.titleLabel.text = header.title
-            itemView.descriptionLabel.text = header.description
-            itemView.settingsButton.isHidden = indexPath.row != 0
-            cell = itemView
+            cell = tableView.dequeueReusableCell(withIdentifier: "items_empty", for: indexPath)
             
         case is Song:
             let song = item as! Song
@@ -196,7 +159,7 @@ class SongsTableViewController: UITableViewController, ItemSongDelegate, Broadca
     }
     
     @objc func update() {
-        if let indexPath = selectedIndexPath, let song = items[indexPath.row] as? Song {
+        if let indexPath = selectedIndexPath, indexPath.row < items.count, let song = items[indexPath.row] as? Song {
             if song.getId() == MainPlayer.shared.source?.getId() {
                 if let cell = tableView.cellForRow(at: indexPath) as? ItemsSongTableViewCell {
                     if let current = MainPlayer.shared.getCurrentTime()?.seconds, let total = MainPlayer.shared.getDuration()?.seconds {
@@ -297,6 +260,25 @@ class SongsTableViewController: UITableViewController, ItemSongDelegate, Broadca
         if let viewController = storyboard?.instantiateViewController(withIdentifier: "settings") as? SettingsViewController {
             navigationController?.pushViewController(viewController, animated: true)
         }
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true;
+    }
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false;
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+        view.endEditing(true)
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+        view.endEditing(true)
+        loadSongs()
     }
     
 

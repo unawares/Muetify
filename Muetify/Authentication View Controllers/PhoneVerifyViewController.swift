@@ -92,7 +92,7 @@ class PhoneVerifyViewController: UIViewController {
     }
 
     @IBAction func backButtonClicked(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func confirmButtonClicked(_ sender: Any) {
@@ -121,7 +121,7 @@ class PhoneVerifyViewController: UIViewController {
             }
             
         } else {
-            navigationController?.popViewController(animated: true)
+            dismiss(animated: true, completion: nil)
         }
     }
     

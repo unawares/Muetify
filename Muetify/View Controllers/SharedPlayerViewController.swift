@@ -24,6 +24,8 @@ class SharedPlayerViewController: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var singerLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var logoImageView: UIImageView!
     
     var timer: Timer!
     
@@ -32,6 +34,8 @@ class SharedPlayerViewController: UIViewController {
             (MainPlayer.shared.isPlaying ?
                 UIImage.init(named: "pause_white") : UIImage.init(named: "play_white")),
             for: .normal)
+        containerView.isHidden = MainPlayer.shared.source == nil
+        logoImageView.isHidden = !containerView.isHidden
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,10 +79,12 @@ class SharedPlayerViewController: UIViewController {
     
     
     @IBAction func playerClicked(_ sender: Any) {
-        if let navigationController = navigationController, let playerViewController = self.storyboard?.instantiateViewController(withIdentifier: "player") as? PlayerViewController {
-            playerViewController.playerDelegate = playerDelegate
-            playerViewController.song = MainPlayer.shared.source as? Song
-            navigationController.show(playerViewController, sender: self)
+        if MainPlayer.shared.source != nil {
+            if let navigationController = navigationController, let playerViewController = self.storyboard?.instantiateViewController(withIdentifier: "player") as? PlayerViewController {
+                playerViewController.playerDelegate = playerDelegate
+                playerViewController.song = MainPlayer.shared.source as? Song
+                navigationController.show(playerViewController, sender: self)
+            }
         }
     }
     

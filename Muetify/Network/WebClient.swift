@@ -58,13 +58,14 @@ enum RequestMethod: String {
     case post = "POST"
     case put = "PUT"
     case delete = "DELETE"
+    case patch = "PATCH"
     
 }
 
 
 extension URL {
     
-    init(baseUrl: String, path: String, params: JSON, method: RequestMethod) {
+    init(baseUrl: String, path: String, params: [String: Any], method: RequestMethod) {
         
         var components = URLComponents(string: baseUrl)!
         components.path += path
@@ -87,7 +88,7 @@ extension URL {
 
 extension URLRequest {
     
-    init(baseUrl: String, path: String, method: RequestMethod, params: JSON) {
+    init(baseUrl: String, path: String, method: RequestMethod, params: [String: Any]) {
         let url = URL(baseUrl: baseUrl, path: path, params: params, method: method)
         self.init(url: url)
         httpMethod = method.rawValue
@@ -114,7 +115,7 @@ final class WebClient {
         self.baseUrl = baseUrl
     }
     
-    func load(path: String, method: RequestMethod, params: JSON, completion: @escaping (Any?, ServiceError?) -> ()) -> URLSessionDataTask? {
+    func load(path: String, method: RequestMethod, params: [String: Any], completion: @escaping (Any?, ServiceError?) -> ()) -> URLSessionDataTask? {
 
         if !Reachability.isConnectedToNetwork() {
             completion(nil, ServiceError.noInternetConnection)

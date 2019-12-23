@@ -146,4 +146,10 @@ class PlayerViewController: UIViewController {
         sync()
     }
     
+    @IBAction func settingsButtonClicked(_ sender: Any) {
+        if let viewController = storyboard?.instantiateViewController(withIdentifier: "settings") as? SettingsViewController {
+            navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+    
 }

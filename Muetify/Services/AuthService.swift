@@ -35,6 +35,17 @@ final class AuthService {
     }
     
     @discardableResult
+    func changeUser(userData: UserData, completion: @escaping (UserData?, ServiceError?) -> ()) -> URLSessionDataTask? {
+        let params: JSON = [
+            "first_name": userData.firstName,
+            "last_name": userData.lastName
+        ]
+        return client.load(path: "/auth/user/", method: .put, params: params) { result, error in
+            completion(UserData(json: result as? JSON), error)
+        }
+    }
+    
+    @discardableResult
     func syncSignIn(forSignInData signInData: SignInData, completion: @escaping (TokenAuthData?, ServiceError?) -> ()) -> URLSessionDataTask? {
         
         let params: JSON = [
@@ -58,9 +69,16 @@ final class AuthService {
                 "last_name": signUpData.userData.lastName
             ]
         ]
-        
+            
         return client.load(path: "/auth/signup/", method: .post, params: params) { result, error in
             completion(TokenAuthData(json: result as? JSON), error)
+        }
+    }
+    
+    @discardableResult
+    func signOut(completion: @escaping (ServiceError?) -> ()) -> URLSessionDataTask? {
+        return client.load(path: "/auth/signout/", method: .delete, params: [:]) { result, error in
+            completion(error)
         }
     }
     

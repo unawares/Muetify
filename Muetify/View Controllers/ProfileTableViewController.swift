@@ -323,4 +323,10 @@ class ProfileTableViewController: UITableViewController, ItemSongDelegate, Broad
        loadSongs()
     }
 
+    @IBAction func settingsButtonClicked(_ sender: Any) {
+        if let viewController = storyboard?.instantiateViewController(withIdentifier: "settings") as? SettingsViewController {
+            navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+    
 }

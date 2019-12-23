@@ -47,6 +47,9 @@
 		0D9EBB0823AFB604006A5CA6 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9EBB0723AFB604006A5CA6 /* InitialViewController.swift */; };
 		0D9EBB0F23AFE099006A5CA6 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D9EBB0E23AFE099006A5CA6 /* Settings.storyboard */; };
 		0D9EBB1123B00138006A5CA6 /* SongTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9EBB1023B00138006A5CA6 /* SongTextViewController.swift */; };
+		0D9EBB1323B0186D006A5CA6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9EBB1223B0186D006A5CA6 /* SettingsViewController.swift */; };
+		0D9EBB1523B05FD5006A5CA6 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9EBB1423B05FD5006A5CA6 /* SearchTableViewController.swift */; };
+		0D9EBB1923B06926006A5CA6 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D9EBB1823B06926006A5CA6 /* Empty.swift */; };
 		0DC7DB1023A3A9160028AB60 /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB0F23A3A9160028AB60 /* ContactsTableViewController.swift */; };
 		0DC7DB1223A3C22F0028AB60 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1123A3C22F0028AB60 /* Contact.swift */; };
 		0DC7DB1423A3C7730028AB60 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC7DB1323A3C7730028AB60 /* PlayerViewController.swift */; };
@@ -132,6 +135,9 @@
 		0D9EBB0723AFB604006A5CA6 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		0D9EBB0E23AFE099006A5CA6 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		0D9EBB1023B00138006A5CA6 /* SongTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTextViewController.swift; sourceTree = "<group>"; };
+		0D9EBB1223B0186D006A5CA6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		0D9EBB1423B05FD5006A5CA6 /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
+		0D9EBB1823B06926006A5CA6 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		0DC7DB0F23A3A9160028AB60 /* ContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
 		0DC7DB1123A3C22F0028AB60 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		0DC7DB1323A3C7730028AB60 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
@@ -203,6 +209,8 @@
 				0DC7DB4923A8E21E0028AB60 /* MainNavigationController.swift */,
 				0D0A07FD23AE34C100FB7944 /* ProfileTableViewController.swift */,
 				0D9EBB1023B00138006A5CA6 /* SongTextViewController.swift */,
+				0D9EBB1223B0186D006A5CA6 /* SettingsViewController.swift */,
+				0D9EBB1423B05FD5006A5CA6 /* SearchTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -233,6 +241,7 @@
 				0DC7DB1123A3C22F0028AB60 /* Contact.swift */,
 				0D0A080323AE3D4E00FB7944 /* ContactHeader.swift */,
 				0D0A080723AEA58800FB7944 /* Broadcast.swift */,
+				0D9EBB1823B06926006A5CA6 /* Empty.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -646,6 +655,7 @@
 				0D26386D2376AAAF0060D31A /* ItemsAlbumCollectionViewCell.swift in Sources */,
 				0D2638692375DBAF0060D31A /* AlbumsCollectionViewController.swift in Sources */,
 				0D2638AC237862B30060D31A /* NetworkCollecitonViewController.swift in Sources */,
+				0D9EBB1923B06926006A5CA6 /* Empty.swift in Sources */,
 				0D52B064237D790A005587A4 /* Source.swift in Sources */,
 				0D2638702376D1930060D31A /* SharedPlayerViewController.swift in Sources */,
 				0DC7DB2723A79A600028AB60 /* PhoneVerifyViewController.swift in Sources */,
@@ -662,7 +672,9 @@
 				0D0A07F423AA40CF00FB7944 /* AppModels.swift in Sources */,
 				0D52B05E237C55C0005587A4 /* Song.swift in Sources */,
 				0D0A080E23AED3C200FB7944 /* ItemsNetworkHeaderCollectionReusableView.swift in Sources */,
+				0D9EBB1323B0186D006A5CA6 /* SettingsViewController.swift in Sources */,
 				0DC7DB2523A78FD10028AB60 /* PhoneViewController.swift in Sources */,
+				0D9EBB1523B05FD5006A5CA6 /* SearchTableViewController.swift in Sources */,
 				0D0A07FA23ABEE5500FB7944 /* ItemsAlbumSongsHeaderTableViewCell.swift in Sources */,
 				0DC7DB2923A7A5DC0028AB60 /* SignUpViewController.swift in Sources */,
 				0D52B058237C0FDB005587A4 /* MainPlayer.swift in Sources */,
