@@ -22,7 +22,7 @@ class AlbumsCollectionViewController: UICollectionViewController, FilterDelegate
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     var token: String!
-    var items: [AlbumBase] = []
+    var items: [Item] = []
     var selectedFilter: FilterType!
     var filterRequestTask: URLSessionDataTask?
     
@@ -40,7 +40,9 @@ class AlbumsCollectionViewController: UICollectionViewController, FilterDelegate
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        collectionView.reloadData()
+        if let filterType = selectedFilter {
+            filterSelected(filterType: filterType)
+        }
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -52,13 +54,32 @@ class AlbumsCollectionViewController: UICollectionViewController, FilterDelegate
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        var cell: UICollectionViewCell?
+        
         let item = items[indexPath.row]
-        let itemView = collectionView.dequeueReusableCell(withReuseIdentifier: "items_album", for: indexPath) as? ItemsAlbumCollectionViewCell
         
-        itemView?.titleLabel.text = item.getTitle()
-        itemView?.countLabel.text = String(item.getCount())
-        
-        return itemView ?? UICollectionViewCell()
+        switch item {
+        case is Album:
+            let album = item as! Album
+            let itemView = collectionView.dequeueReusableCell(withReuseIdentifier: "items_album", for: indexPath) as? ItemsAlbumCollectionViewCell
+            
+            itemView?.titleLabel.text = album.albumBase.getTitle()
+            itemView?.countLabel.text = String(album.albumBase.getCount())
+            
+            if selectedFilter == .FOLDERS {
+                let lpgr = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+                itemView?.contentView.addGestureRecognizer(lpgr)
+            }
+            
+            cell = itemView
+        case is Add:
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: "items_add", for: indexPath)
+        default:
+            break
+        }
+
+        return cell ?? UICollectionViewCell()
     }
     
     override func collectionView(_ collectionView: UICollectionView,
@@ -91,7 +112,10 @@ class AlbumsCollectionViewController: UICollectionViewController, FilterDelegate
     }
     
     func syncAlbums(albums: [AlbumBase]) {
-        items = albums
+        items.removeAll()
+        for albumBase in albums {
+            items.append(Album(albumBase: albumBase))
+        }
         collectionView.reloadData()
         indicator.stopAnimating()
     }
@@ -111,7 +135,13 @@ class AlbumsCollectionViewController: UICollectionViewController, FilterDelegate
                         self?.showMessage(title: "Error", message: error.localizedDescription)
                         self?.indicator.stopAnimating()
                     } else {
-                        self?.syncAlbums(albums: userFolderDatas)
+                        self?.items.removeAll()
+                        for albumBase in userFolderDatas {
+                            self?.items.append(Album(albumBase: albumBase))
+                        }
+                        self?.items.append(Add())
+                        self?.collectionView.reloadData()
+                        self?.indicator.stopAnimating()
                     }
                 }
             }
@@ -141,18 +171,144 @@ class AlbumsCollectionViewController: UICollectionViewController, FilterDelegate
         
         selectedFilter = filterType
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if items[indexPath.row] is Add {
+            showCreateForm()
+        }
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let albumSongsTableViewController = segue.destination as? AlbumSongsTableViewController,
             let indexPath = collectionView.indexPathsForSelectedItems?.first {
-            albumSongsTableViewController.album = items[indexPath.row]
-            albumSongsTableViewController.filterType = selectedFilter
+            if let album = items[indexPath.row] as? Album {
+                albumSongsTableViewController.album = album
+                albumSongsTableViewController.filterType = selectedFilter
+            }
         }
     }
     
     @IBAction func settingsButtonClicked(_ sender: Any) {
         if let viewController = storyboard?.instantiateViewController(withIdentifier: "settings") as? SettingsViewController {
             navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    
+    func showCreateForm() {
+        let alertController = UIAlertController(title: "Добавить новый альбом", message: nil, preferredStyle: .alert)
+        
+        let confirmAction = UIAlertAction(title: "Добавить", style: .default) { (_) in
+            if let titleField = alertController.textFields?[0], let title = titleField.text,
+                let descriptionField = alertController.textFields?[1], let description = descriptionField.text {
+                if title.count > 0 && description.count > 0 {
+                    
+                    AppService().setToken(token: self.token).createFolder(folder: UserFolderPostData(
+                        title: title, description: description)) { [weak self] folder, error in
+                            DispatchQueue.main.async {
+                                if let error = error {
+                                    self?.showMessage(title: "Ошибка", message: error.localizedDescription)
+                                } else {
+                                    self?.filterSelected(filterType: self?.selectedFilter ?? .FOLDERS)
+                                }
+                            }
+                    }
+                    
+                } else {
+                    self.showMessage(title: "Неправильные данные", message: "Пожалуйстве заполните формы правильно.")
+                }
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { (_) in }
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Название"
+        }
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Описание"
+        }
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func showUpdateForm(album: Album) {
+        if let folderData = album.albumBase as? UserFolderData {
+            let alertController = UIAlertController(title: "Изменить альбом", message: nil, preferredStyle: .alert)
+            
+            let confirmAction = UIAlertAction(title: "Изменить", style: .default) { (_) in
+                if let titleField = alertController.textFields?[0], let title = titleField.text,
+                    let descriptionField = alertController.textFields?[1], let description = descriptionField.text {
+                    if title.count > 0 && description.count > 0 {
+                        
+                        AppService().setToken(token: self.token).updateFolder(folderKey: album.albumBase.getKey(), toFolder: UserFolderPostData(
+                            title: title, description: description)) { [weak self] folder, error in
+                                DispatchQueue.main.async {
+                                    if let error = error {
+                                        self?.showMessage(title: "Ошибка", message: error.localizedDescription)
+                                    } else {
+                                        self?.filterSelected(filterType: self?.selectedFilter ?? .FOLDERS)
+                                    }
+                                }
+                        }
+                        
+                    } else {
+                        self.showMessage(title: "Неправильные данные", message: "Пожалуйстве заполните формы правильно.")
+                    }
+                }
+            }
+            
+            let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { (_) in }
+            alertController.addTextField { (textField) in
+                textField.placeholder = "Название"
+                textField.text = folderData.title
+            }
+            alertController.addTextField { (textField) in
+                textField.placeholder = "Описание"
+                textField.text = folderData.description
+            }
+            alertController.addAction(confirmAction)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func showActionsFor(album: Album) {
+        let alert = UIAlertController(title: album.albumBase.getTitle(), message: "Выберите действие", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Изменить", style: .default, handler: { (_) in
+            self.showUpdateForm(album: album)
+        }))
+
+        alert.addAction(UIAlertAction(title: "Удалить", style: .default, handler: { (_) in
+            AppService().setToken(token: self.token).removeFolder(folderKey: album.albumBase.getKey()) { [weak self] error in
+                    DispatchQueue.main.async {
+                        if let error = error {
+                            self?.showMessage(title: "Ошибка", message: error.localizedDescription)
+                        } else {
+                            self?.filterSelected(filterType: self?.selectedFilter ?? .FOLDERS)
+                        }
+                    }
+            }
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    @objc func handleLongPress(gesture : UILongPressGestureRecognizer!) {
+        if gesture.state != .ended {
+            return
+        }
+        let p = gesture.location(in: self.collectionView)
+        if let indexPath = self.collectionView.indexPathForItem(at: p) {
+            if let album = items[indexPath.row] as? Album {
+                showActionsFor(album: album)
+            }
+        } else {
+            print("couldn't find index path")
         }
     }
     

@@ -11,7 +11,7 @@ import UIKit
 class AlbumSongsTableViewController: UITableViewController, ItemSongDelegate, BroadcastPlayerDelegate, MainPlayerDelegate, CurrentContextDelegate {
     
     var token: String!
-    var album: AlbumBase?
+    var album: Album?
     var filterType: FilterType?
     var items: [Item] = []
     var task: URLSessionDataTask?
@@ -72,33 +72,33 @@ class AlbumSongsTableViewController: UITableViewController, ItemSongDelegate, Br
             
             switch filterType {
             case .FOLDERS:
-                appService.getFolderSongs(folder: album.getKey()) { [weak self] songs, error in
+                appService.getFolderSongs(folder: album.albumBase.getKey()) { [weak self] songs, error in
                     DispatchQueue.main.async {
                         if let error = error {
                             self?.showMessage(title: "Error", message: error.localizedDescription)
                             self?.refreshControl?.endRefreshing()
                         }
-                        self?.syncSongs(album: album, songs: songs)
+                        self?.syncSongs(album: album.albumBase, songs: songs)
                     }
                 }
             case .GENRES:
-                appService.getGenreSongs(genre: album.getKey()) { [weak self] songs, error in
+                appService.getGenreSongs(genre: album.albumBase.getKey()) { [weak self] songs, error in
                     DispatchQueue.main.async {
                         if let error = error {
                             self?.showMessage(title: "Error", message: error.localizedDescription)
                             self?.refreshControl?.endRefreshing()
                         }
-                        self?.syncSongs(album: album, songs: songs)
+                        self?.syncSongs(album: album.albumBase, songs: songs)
                     }
                 }
             case .SINGERS:
-                appService.getSingerSongs(singer: album.getKey()) { [weak self] songs, error in
+                appService.getSingerSongs(singer: album.albumBase.getKey()) { [weak self] songs, error in
                     DispatchQueue.main.async {
                         if let error = error {
                             self?.showMessage(title: "Error", message: error.localizedDescription)
                             self?.refreshControl?.endRefreshing()
                         }
-                        self?.syncSongs(album: album, songs: songs)
+                        self?.syncSongs(album: album.albumBase, songs: songs)
                     }
                 }
             }

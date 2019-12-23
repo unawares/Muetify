@@ -195,4 +195,34 @@ final class AppService {
         }
     }
     
+    
+    @discardableResult
+    func createFolder(folder: UserFolderPostData, completion: @escaping (UserFolderData?, ServiceError?) -> ()) -> URLSessionDataTask? {
+        
+        return client.load(path: "/songs/folders/", method: .post, params: [
+            "title": folder.title,
+            "description": folder.description
+        ]) { result, error in
+            completion(UserFolderData(json: result as? JSON), error)
+        }
+    }
+    
+    @discardableResult
+    func updateFolder(folderKey: String, toFolder: UserFolderPostData, completion: @escaping (UserFolderData?, ServiceError?) -> ()) -> URLSessionDataTask? {
+        
+        return client.load(path: "/songs/folders/\(folderKey)/", method: .put, params: [
+            "title": toFolder.title,
+            "description": toFolder.description
+        ]) { result, error in
+            completion(UserFolderData(json: result as? JSON), error)
+        }
+    }
+    
+    @discardableResult
+    func removeFolder(folderKey: String, completion: @escaping (ServiceError?) -> ()) -> URLSessionDataTask? {
+        return client.load(path: "/songs/folders/\(folderKey)/", method: .delete, params: [:]) { result, error in
+            completion(error)
+        }
+    }
+    
 }

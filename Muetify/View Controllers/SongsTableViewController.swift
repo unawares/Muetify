@@ -45,6 +45,8 @@ class SongsTableViewController: UITableViewController, ItemSongDelegate, Broadca
         for songReference in songReferences {
             if let songData = songReference.songData {
                 
+                MySongs.shared.addSong(id: songData.pk)
+                
                 let song = Song(
                     id: songData.pk,
                     url: URL(string: songData.media)!,

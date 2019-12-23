@@ -210,10 +210,18 @@ extension UserFolderData {
             self.pk = json["pk"] as! Int
             self.title = json["title"] as! String
             self.description = json["description"] as! String
-            self.count = json["songs_count"] as! Int
+            self.count = (json["songs_count"] as? Int) ?? 0
         } else {
             return nil
         }
     }
+    
+}
+
+
+struct UserFolderPostData: Decodable {
+    
+    var title: String
+    var description: String
     
 }

@@ -22,7 +22,7 @@ final class AuthService {
     func syncPhoneNumber(forPhoneNumber phoneNumber: PhoneNumberModel, completion: @escaping (PhoneNumberModel?, ServiceError?) -> ()) -> URLSessionDataTask? {
         let params: JSON = ["phone_number": phoneNumber.phoneNumber]
         
-        return client.load(path: "/auth/phone/", method: .post, params: params) { result, error in
+        return client.load(path: "/auth/phone/", method: .post, params: params as [String : Any]) { result, error in
             completion(PhoneNumberModel(json: result as? JSON), error)
         }
     }
@@ -40,7 +40,7 @@ final class AuthService {
             "first_name": userData.firstName,
             "last_name": userData.lastName
         ]
-        return client.load(path: "/auth/user/", method: .put, params: params) { result, error in
+        return client.load(path: "/auth/user/", method: .put, params: params as [String : Any]) { result, error in
             completion(UserData(json: result as? JSON), error)
         }
     }
@@ -53,7 +53,7 @@ final class AuthService {
             "data": signInData.data,
         ]
         
-        return client.load(path: "/auth/signin/", method: .post, params: params) { result, error in
+        return client.load(path: "/auth/signin/", method: .post, params: params as [String : Any]) { result, error in
             completion(TokenAuthData(json: result as? JSON), error)
         }
     }
@@ -70,7 +70,7 @@ final class AuthService {
             ]
         ]
             
-        return client.load(path: "/auth/signup/", method: .post, params: params) { result, error in
+        return client.load(path: "/auth/signup/", method: .post, params: params as [String : Any]) { result, error in
             completion(TokenAuthData(json: result as? JSON), error)
         }
     }

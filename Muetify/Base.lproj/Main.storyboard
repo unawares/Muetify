@@ -650,6 +650,8 @@
                                     <constraints>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YeF-yg-anc" secondAttribute="trailing" constant="16" id="4gY-aA-2kf"/>
                                         <constraint firstItem="son-jP-pef" firstAttribute="top" secondItem="YeF-yg-anc" secondAttribute="bottom" id="9cm-jk-0zB"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="son-jP-pef" secondAttribute="trailing" constant="16" id="J9a-CV-qSX"/>
+                                        <constraint firstItem="son-jP-pef" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QEb-FL-uTz" secondAttribute="leading" constant="16" id="JYp-bS-2oP"/>
                                         <constraint firstItem="YeF-yg-anc" firstAttribute="centerY" secondItem="QEb-FL-uTz" secondAttribute="centerY" constant="-12" id="Nr1-iK-7an"/>
                                         <constraint firstAttribute="bottom" secondItem="b98-09-vzj" secondAttribute="bottom" id="OTu-wz-9lh"/>
                                         <constraint firstAttribute="trailing" secondItem="b98-09-vzj" secondAttribute="trailing" id="QvK-W3-3S3"/>
@@ -666,6 +668,51 @@
                                     <outlet property="titleLabel" destination="son-jP-pef" id="PYB-cV-e22"/>
                                     <segue destination="pkh-tL-eY0" kind="show" identifier="album_songs" id="pBU-Sr-T14"/>
                                 </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="items_add" id="7oB-YD-GRR">
+                                <rect key="frame" x="193" y="176" width="150" height="150"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="1oN-XO-RnQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TWT-ar-dyt" customClass="CustomView" customModule="Muetify" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Добавить Альбом" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKk-JQ-c9K">
+                                                    <rect key="frame" x="24.666666666666664" y="68" width="100.66666666666669" height="14"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HKk-JQ-c9K" secondAttribute="trailing" constant="16" id="VlZ-M8-qAn"/>
+                                                <constraint firstItem="HKk-JQ-c9K" firstAttribute="centerY" secondItem="TWT-ar-dyt" secondAttribute="centerY" id="dy3-03-6Kx"/>
+                                                <constraint firstItem="HKk-JQ-c9K" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TWT-ar-dyt" secondAttribute="leading" constant="16" id="lVG-0o-msb"/>
+                                                <constraint firstItem="HKk-JQ-c9K" firstAttribute="centerX" secondItem="TWT-ar-dyt" secondAttribute="centerX" id="spJ-0t-W5D"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="4"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
+                                                    <real key="value" value="18"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="TWT-ar-dyt" secondAttribute="trailing" id="3MO-x1-SLl"/>
+                                        <constraint firstItem="TWT-ar-dyt" firstAttribute="leading" secondItem="1oN-XO-RnQ" secondAttribute="leading" id="P8i-zF-j3h"/>
+                                        <constraint firstAttribute="bottom" secondItem="TWT-ar-dyt" secondAttribute="bottom" id="Q7Y-uJ-0gR"/>
+                                        <constraint firstItem="TWT-ar-dyt" firstAttribute="top" secondItem="1oN-XO-RnQ" secondAttribute="top" id="gXv-YE-dCy"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="items_header" id="Qxu-pk-C4c" customClass="ItemsHeaderCollectionReusableView" customModule="Muetify" customModuleProvider="target">
